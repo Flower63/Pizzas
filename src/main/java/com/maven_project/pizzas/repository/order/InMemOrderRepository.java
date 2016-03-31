@@ -3,7 +3,7 @@ package com.maven_project.pizzas.repository.order;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.maven_project.pizzas.Order;
+import com.maven_project.pizzas.domain.Order;
 
 public class InMemOrderRepository implements OrderRepository {
 	private List<Order> orders = new ArrayList<>();
