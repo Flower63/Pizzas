@@ -15,6 +15,8 @@ import com.maven_project.pizzas.service.discount.DiscountService;
 import com.maven_project.pizzas.service.discount.DiscountServiceImplenementation;
 
 public class SimpleOrderService implements OrderService {
+
+	private static final int MAX_PIZZAS_NUMBER = 10;
 	
 	private OrderRepository orderRepository;
 	private PizzaRepository pizzaRepository;
@@ -37,7 +39,7 @@ public class SimpleOrderService implements OrderService {
 	public Order placeNewOrder(Customer customer, Integer ... pizzasID) {
 		
 		// Temporally solution
-		if (pizzasID.length > 10) {
+		if (pizzasID.length > MAX_PIZZAS_NUMBER) {
 			throw new IllegalArgumentException();
 		}
 
@@ -76,6 +78,16 @@ public class SimpleOrderService implements OrderService {
 		}
 		
 		order.proceedOrder();
+	}
+
+	@Override
+	public boolean alterOrder(Order order, List<Pizza> pizzas) {
+
+		if (pizzas.size() > MAX_PIZZAS_NUMBER) {
+			return false;
+		}
+
+		return order.setPizzas(pizzas);
 	}
 
 	@Override

@@ -101,4 +101,8 @@ public class Order {
 			return CANCELED;
 		}
 	}
+
+	static void discardCounter() {
+		counter = 0;
+	}
 }
