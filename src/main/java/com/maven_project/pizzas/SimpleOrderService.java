@@ -3,6 +3,7 @@ package com.maven_project.pizzas;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.maven_project.pizzas.ifrastructure.ServiceLocator;
 import com.maven_project.pizzas.repository.order.InMemOrderRepository;
 import com.maven_project.pizzas.repository.order.OrderRepository;
 import com.maven_project.pizzas.repository.pizza.InMemPizzaRepository;
@@ -10,9 +11,15 @@ import com.maven_project.pizzas.repository.pizza.PizzaRepository;
 
 public class SimpleOrderService implements OrderService {
 	
-	private OrderRepository orderRepository = new InMemOrderRepository();
-	private PizzaRepository pizzaRepository = new InMemPizzaRepository();
+	//private ServiceLocator locator = ServiceLocator.getInstance();
+	private OrderRepository orderRepository; // = (OrderRepository) locator.lookup("orderRepository");
+	private PizzaRepository pizzaRepository; // = (PizzaRepository) locator.lookup("pizzaRepository");
 	
+	public SimpleOrderService(OrderRepository orderRepository, PizzaRepository pizzaRepository) {
+		this.orderRepository = orderRepository;
+		this.pizzaRepository = pizzaRepository;
+	}
+
 	@Override
 	public Order placeNewOrder(Customer customer, Integer ... pizzasID) {
 
