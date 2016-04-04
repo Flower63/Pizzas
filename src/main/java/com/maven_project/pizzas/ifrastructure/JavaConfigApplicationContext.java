@@ -11,17 +11,16 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 	
 	@Override
 	public Object getBean(String bean) throws Exception {
-		Object cache;
+		Object cache = context.get(bean);
 		
-		if (context.containsKey(bean)) {
-			return context.get(bean);
+		if (cache != null) {
+			return cache;
 		}
 		
 		Class<?> clazz = config.getImpl(bean);
 		
 		Constructor<?> constructor = clazz.getConstructors()[0];
 		Class<?>[] params = constructor.getParameterTypes();
-		//Object[] paramBeans = new Object[params.length];
 		
 		if (params.length == 0) {
 			cache = clazz.newInstance();
@@ -29,7 +28,7 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 			Object[] paramBeans = new Object[params.length];
 			
 			for (int i = 0; i < params.length; i++) {
-				String paramName = null;
+				String paramName;
 				String name = params[i].getSimpleName();
 				paramName = Character.toLowerCase(name.charAt(0)) + name.substring(1);
 				paramBeans[i] = getBean(paramName);
@@ -37,8 +36,7 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 			
 			cache = constructor.newInstance(paramBeans);
 		}
-		
-		//cache = clazz.newInstance();
+
 		context.put(bean, cache);
 		
 		return cache;

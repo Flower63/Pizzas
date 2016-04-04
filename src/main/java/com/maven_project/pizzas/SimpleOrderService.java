@@ -11,9 +11,8 @@ import com.maven_project.pizzas.repository.pizza.PizzaRepository;
 
 public class SimpleOrderService implements OrderService {
 	
-	//private ServiceLocator locator = ServiceLocator.getInstance();
-	private OrderRepository orderRepository; // = (OrderRepository) locator.lookup("orderRepository");
-	private PizzaRepository pizzaRepository; // = (PizzaRepository) locator.lookup("pizzaRepository");
+	private OrderRepository orderRepository;
+	private PizzaRepository pizzaRepository;
 	
 	public SimpleOrderService(OrderRepository orderRepository, PizzaRepository pizzaRepository) {
 		this.orderRepository = orderRepository;
