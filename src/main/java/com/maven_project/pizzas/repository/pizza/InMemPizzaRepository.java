@@ -17,7 +17,7 @@ public class InMemPizzaRepository implements PizzaRepository {
 		pizzasList.add(new Pizza(2, "Regular pizza 1", Type.REGULAR));
 		pizzasList.add(new Pizza(3, "Vegeterian pizza 1", Type.VEGETERIAN));
 	}
-	
+
 	@Benchmark
 	@Override
 	public Pizza getPizzaByID(Integer id) {
