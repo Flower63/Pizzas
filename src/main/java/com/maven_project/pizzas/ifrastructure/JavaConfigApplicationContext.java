@@ -1,7 +1,10 @@
 package com.maven_project.pizzas.ifrastructure;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +27,7 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 		builder.createBean();
 		builder.createBeanProxy(); //@BanchMark annotation -Method, (active = true/false)
 		builder.callPostConstructMethod();
-		builder.callInitMethod(); // call init() method
+		builder.callInitMethod();
 		bean = builder.build();
 
 		context.put(beanName, bean);
@@ -32,7 +35,7 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 		return bean;
 	}
 
-	static class BeanBuilder {
+	public static class BeanBuilder {
 		private final Class<?> clazz;
 		private Object bean;
 		private ApplicationContext context;
@@ -50,7 +53,7 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 			Method[] methods = clazz.getMethods();
 			
 			for (Method m : methods) {
-				if (m.getAnnotation(PostConstruct.class) != null) {
+				if (m.getName() == "init") {
 					m.invoke(bean);
 				}
 			}
@@ -66,9 +69,19 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 			}
 		}
 
-		public void createBeanProxy() {
+		public Object createBeanProxy() {
 			// TODO Auto-generated method stub
 			// Proxy.newProxyInstance
+			
+			Method[] methods = clazz.getMethods();
+			
+			for (Method m : methods) {
+				if (m.getAnnotation(Benchmark.class) != null && m.getAnnotation(Benchmark.class).active()) {
+					return Proxy.newProxyInstance(clazz.getClassLoader(), clazz.getInterfaces(), new BeanProxy(bean));
+				}
+			}
+			
+			return bean;
 		}
 
 		public void createBean() throws Exception {
@@ -106,6 +119,21 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 		private String changeFirstLetterToLowerCase(String name) {
 			String paramName = Character.toLowerCase(name.charAt(0)) + name.substring(1);
 			return paramName;
+		}
+		
+	}
+	
+	public static class BeanProxy implements InvocationHandler {
+		Object obj;
+
+		public BeanProxy(Object obj) {
+			this.obj = obj;
+		}
+
+		@Override
+		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+			System.out.println("proxy method");
+			return method.invoke(obj, args);
 		}
 		
 	}

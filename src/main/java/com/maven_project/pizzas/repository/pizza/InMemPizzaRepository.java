@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.maven_project.pizzas.Pizza;
 import com.maven_project.pizzas.Pizza.Type;
+import com.maven_project.pizzas.ifrastructure.Benchmark;
 import com.maven_project.pizzas.ifrastructure.PostConstruct;
 
 public class InMemPizzaRepository implements PizzaRepository {
@@ -17,6 +18,7 @@ public class InMemPizzaRepository implements PizzaRepository {
 		pizzasList.add(new Pizza(3, "Vegeterian pizza 1", Type.VEGETERIAN));
 	}
 	
+	@Benchmark
 	@Override
 	public Pizza getPizzaByID(Integer id) {
 		for(Pizza p : pizzasList) {
@@ -26,6 +28,10 @@ public class InMemPizzaRepository implements PizzaRepository {
 		}
 		
 		return null;
+	}
+	
+	public void init() {
+		System.out.println("init method in " + this.getClass().getSimpleName());
 	}
 
 }
