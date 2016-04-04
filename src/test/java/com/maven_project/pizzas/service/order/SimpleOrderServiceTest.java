@@ -7,14 +7,10 @@ import com.maven_project.pizzas.domain.Order;
 import com.maven_project.pizzas.domain.Pizza;
 import com.maven_project.pizzas.repository.order.InMemOrderRepository;
 import com.maven_project.pizzas.repository.order.OrderRepository;
-import com.maven_project.pizzas.repository.pizza.InMemPizzaRepository;
 import com.maven_project.pizzas.repository.pizza.PizzaRepository;
 import com.maven_project.pizzas.service.discount.DiscountServiceImplenementation;
 
 import junit.framework.TestCase;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class SimpleOrderServiceTest extends TestCase {
 
