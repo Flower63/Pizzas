@@ -1,10 +1,11 @@
 package com.maven_project.pizzas.domain;
 
+import com.maven_project.pizzas.service.card.AccumulativeCard;
+
 public class Customer {
 	private int id;
 	private String name;
 	private Address address;
-	private AccumulativeCard card;
 	
 	public Customer(int id, String name, Address address) {
 		this.id = id;
@@ -34,13 +35,5 @@ public class Customer {
 
 	public void setAddress(Address address) {
 		this.address = address;
-	}
-
-	public AccumulativeCard getCard() {
-		return card;
-	}
-
-	public void setCard(AccumulativeCard card) {
-		this.card = card;
 	}
 }

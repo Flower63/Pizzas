@@ -17,4 +17,6 @@ public interface OrderService {
 	void cancelOrder(Order order);
 
 	double countTotalCost(Order order);
+	
+	double calculateDiscount(Order order);
 }

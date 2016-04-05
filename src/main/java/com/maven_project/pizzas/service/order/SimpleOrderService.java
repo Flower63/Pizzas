@@ -5,14 +5,12 @@ import java.util.List;
 
 import com.maven_project.pizzas.domain.Customer;
 import com.maven_project.pizzas.domain.Order;
-import com.maven_project.pizzas.domain.Order.State;
 import com.maven_project.pizzas.domain.Pizza;
 import com.maven_project.pizzas.repository.order.InMemOrderRepository;
 import com.maven_project.pizzas.repository.order.OrderRepository;
 import com.maven_project.pizzas.repository.pizza.InMemPizzaRepository;
 import com.maven_project.pizzas.repository.pizza.PizzaRepository;
 import com.maven_project.pizzas.service.discount.DiscountService;
-import com.maven_project.pizzas.service.discount.DiscountServiceImplenementation;
 
 public class SimpleOrderService implements OrderService {
 
@@ -25,7 +23,7 @@ public class SimpleOrderService implements OrderService {
 	public SimpleOrderService() {
 		this.orderRepository = new InMemOrderRepository();
 		this.pizzaRepository = new InMemPizzaRepository();
-		this.discountService = new DiscountServiceImplenementation();
+		this.discountService = new DiscountService();
 	}
 	
 	public SimpleOrderService(OrderRepository orderRepository, PizzaRepository pizzaRepository,
@@ -70,13 +68,6 @@ public class SimpleOrderService implements OrderService {
 
 	@Override
 	public void proceedOrder(Order order) {
-		
-		if (order.getState() == State.NEW && order.getCustomer().getCard() != null) {
-			double cost = countTotalCost(order);
-			
-			order.getCustomer().getCard().addToTotalAmount(cost);
-		}
-		
 		order.proceedOrder();
 	}
 
@@ -97,14 +88,17 @@ public class SimpleOrderService implements OrderService {
 
 	@Override
 	public double countTotalCost(Order order) {
-		double total = 0D;
+		double total = 0;
 		
 		for (Pizza pizza : order.getPizzas()) {
 			total += pizza.getCost();
 		}
 		
-		total -= discountService.countDiscount(order);
-		
 		return total;
+	}
+
+	@Override
+	public double calculateDiscount(Order order) {
+		return discountService.countDiscount(order);
 	}
 }

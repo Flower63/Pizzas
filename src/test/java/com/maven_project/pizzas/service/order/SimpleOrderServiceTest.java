@@ -8,7 +8,7 @@ import com.maven_project.pizzas.domain.Pizza;
 import com.maven_project.pizzas.repository.order.InMemOrderRepository;
 import com.maven_project.pizzas.repository.order.OrderRepository;
 import com.maven_project.pizzas.repository.pizza.PizzaRepository;
-import com.maven_project.pizzas.service.discount.DiscountServiceImplenementation;
+import com.maven_project.pizzas.service.discount.DiscountService;
 
 import junit.framework.TestCase;
 
@@ -17,8 +17,7 @@ public class SimpleOrderServiceTest extends TestCase {
 	public void testPlaceNewOrder() {
 		OrderRepository orderRepository = mock(OrderRepository.class);
 		PizzaRepository pizzaRepository = mock(PizzaRepository.class);
-		DiscountServiceImplenementation discountServiceImplenementation = mock(DiscountServiceImplenementation.class);
-		OrderService orderService = new SimpleOrderService(orderRepository, pizzaRepository, discountServiceImplenementation);
+		OrderService orderService = new SimpleOrderService(orderRepository, pizzaRepository, new DiscountService());
 		
 		Order order = orderService.placeNewOrder(null, 1, 2, 3);
 		
@@ -53,10 +52,8 @@ public class SimpleOrderServiceTest extends TestCase {
 		PizzaRepository pizzaRepository = mock(PizzaRepository.class);
 		when(pizzaRepository.getPizzaByID(1)).thenReturn(new Pizza(1, "Fake pizza", Pizza.Type.REGULAR, 10D));
 		Customer customer = mock(Customer.class);
-		when(customer.getCard()).thenReturn(null);
-		DiscountServiceImplenementation discountServiceImplenementation = mock(DiscountServiceImplenementation.class);
 		OrderService orderService =
-				new SimpleOrderService(new InMemOrderRepository(), pizzaRepository, discountServiceImplenementation);
+				new SimpleOrderService(new InMemOrderRepository(), pizzaRepository, new DiscountService());
 
 		Order order = orderService.placeNewOrder(customer, 1, 1, 1);
 
