@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
- * Created by Dennis
+ * Created by Denys
  *
  * on 4/4/2016.
  */
@@ -24,7 +24,7 @@ public class BeanBuilder {
     }
 
     public Object build() {
-        return beanProxy;
+        return beanProxy == null ? bean : beanProxy;
     }
 
     public void callInitMethod() throws Exception {
@@ -32,7 +32,7 @@ public class BeanBuilder {
 
 		for (Method m : methods) {
             if (INIT_METH_NAME.equals(m.getName())) {
-				beanProxy.getClass().getMethod(INIT_METH_NAME).invoke(beanProxy);
+            	m.invoke(bean);
 				break;
             }
         }
@@ -43,7 +43,7 @@ public class BeanBuilder {
 
 		for (Method m : methods) {
             if (m.getAnnotation(PostConstruct.class) != null) {
-				beanProxy.getClass().getMethod(m.getName()).invoke(beanProxy);
+            	m.invoke(bean);
             }
         }
     }
@@ -68,8 +68,6 @@ public class BeanBuilder {
         } else {
             bean = createNewInstanceWithParams(constructor, params);
         }
-
-		beanProxy = bean;
 	}
 
 	private Object createNewInstanceWithParams(Constructor<?> constructor, Class<?>[] params)
