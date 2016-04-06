@@ -9,14 +9,23 @@ import com.maven_project.pizzas.repository.pizza.PizzaRepository;
 public class SpringPizzaApp {
 
 	public static void main(String[] args) throws Exception {
+		Customer customer = null;
+
+        Order order;
+        
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("appContext.xml");
 		
 		PizzaRepository pr = (PizzaRepository) appContext.getBean("pizzaRepository");
 		
 		System.out.println(pr.getPizzaByID(1));
-		
-		((AbstractApplicationContext) appContext).close();
 
+        OrderService orderService = (OrderService) appContext.getBean("orderService");
+
+        order = orderService.placeNewOrder(customer, 1, 2, 3);
+
+        System.out.println(order);
+
+        ((AbstractApplicationContext) appContext).close();
 	}
 
 }

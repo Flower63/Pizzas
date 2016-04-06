@@ -12,6 +12,7 @@ public class PizzaApp {
         Order order;
         
         ApplicationContext ac = new JavaConfigApplicationContext();
+        
         PizzaRepository pizzaRepository = (PizzaRepository) ac.getBean("pizzaRepository");
         
         System.out.println(pizzaRepository.getPizzaByID(1));
