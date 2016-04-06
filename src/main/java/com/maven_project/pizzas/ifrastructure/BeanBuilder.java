@@ -104,7 +104,8 @@ public class BeanBuilder {
 
 		@Override
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-			if (method.getAnnotation(Benchmark.class) != null) {
+			if (obj.getClass().getMethod(method.getName(), method.getParameterTypes())
+					.isAnnotationPresent(Benchmark.class)) {
 				long before = System.nanoTime();
 				Object result = method.invoke(obj, args);
 				long after = System.nanoTime();

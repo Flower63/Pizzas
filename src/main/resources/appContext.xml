@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+	<bean name="pizzaRepository" 
+	class="com.maven_project.pizzas.repository.pizza.InMemPizzaRepository"
+	init-method="cookPizzas" />
+	
+	<bean name="orderRepository"
+	class="com.maven_project.pizzas.repository.order.InMemOrderRepository"/>
+	
+	<bean name="orderService"
+	class="com.maven_project.pizzas.SimpleOrderService">
+	<constructor-arg ref="orderRepository" />
+	<constructor-arg ref="pizzaRepository" />
+	</bean>
+</beans>

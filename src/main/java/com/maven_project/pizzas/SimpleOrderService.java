@@ -3,10 +3,7 @@ package com.maven_project.pizzas;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.maven_project.pizzas.ifrastructure.ServiceLocator;
-import com.maven_project.pizzas.repository.order.InMemOrderRepository;
 import com.maven_project.pizzas.repository.order.OrderRepository;
-import com.maven_project.pizzas.repository.pizza.InMemPizzaRepository;
 import com.maven_project.pizzas.repository.pizza.PizzaRepository;
 
 public class SimpleOrderService implements OrderService {
