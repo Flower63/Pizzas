@@ -9,7 +9,7 @@ import com.maven_project.pizzas.domain.Pizza.Type;
 public class InMemPizzaRepository implements PizzaRepository {
 	private List<Pizza> pizzasList = new ArrayList<>();
 	
-	{
+	public void cookPizzas() {
 		pizzasList.add(new Pizza(1, "Sea pizza 1", Type.SEA, 12.5));
 		pizzasList.add(new Pizza(2, "Regular pizza 1", Type.REGULAR, 14.0));
 		pizzasList.add(new Pizza(3, "Vegeterian pizza 1", Type.VEGETERIAN, 11.7));

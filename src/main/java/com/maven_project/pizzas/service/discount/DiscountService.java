@@ -6,8 +6,12 @@ import com.maven_project.pizzas.domain.Order;
 
 public class DiscountService {
 	
-	private final DiscountProvider provider = new DiscountProvider();
+	private final DiscountProvider provider;
 	
+	public DiscountService(DiscountProvider provider) {
+		this.provider = provider;
+	}
+
 	public double countDiscount(Order order) {
 		List<Discount> discounts = provider.getDiscounts(order);
 		

@@ -12,11 +12,11 @@ public class PizzaApp {
 
         Order order;
 
-        OrderService orderService = new SimpleOrderService();
+        //OrderService orderService = new SimpleOrderService();
 
-        order = orderService.placeNewOrder(customer, 1, 2, 3);
-
-        System.out.println(order);
+//        order = orderService.placeNewOrder(customer, 1, 2, 3);
+//
+//        System.out.println(order);
 	}
 
 }
