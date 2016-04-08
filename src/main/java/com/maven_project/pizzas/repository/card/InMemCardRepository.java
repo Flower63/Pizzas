@@ -15,4 +15,10 @@ public class InMemCardRepository implements CardRepository {
 		return storage.get(customer.getName());
 	}
 
+	@Override
+	public void initCards() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

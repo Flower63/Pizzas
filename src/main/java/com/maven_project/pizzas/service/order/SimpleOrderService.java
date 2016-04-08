@@ -20,12 +20,6 @@ public class SimpleOrderService implements OrderService {
 	private PizzaRepository pizzaRepository;
 	private DiscountService discountService;
 	
-//	public SimpleOrderService() {
-//		this.orderRepository = new InMemOrderRepository();
-//		this.pizzaRepository = new InMemPizzaRepository();
-//		this.discountService = new DiscountService();
-//	}
-	
 	public SimpleOrderService(OrderRepository orderRepository, PizzaRepository pizzaRepository,
 			DiscountService discountService) {
 		this.orderRepository = orderRepository;

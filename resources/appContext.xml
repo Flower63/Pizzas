@@ -11,8 +11,14 @@
 	<bean name="orderRepository"
 	class="com.maven_project.pizzas.repository.order.InMemOrderRepository"/>
 	
-	<bean name="cardtService"
-	class="com.maven_project.pizzas.service.card.AccumulativeCardService"/>
+	<bean name="cardRepository" 
+	class="com.maven_project.pizzas.repository.card.InMemCardRepository"
+	init-method="initCards" />
+	
+	<bean name="cardService"
+	class="com.maven_project.pizzas.service.card.AccumulativeCardService">
+	<constructor-arg ref="cardRepository" />
+	</bean>
 	
 	<bean name="discountProvider"
 	class="com.maven_project.pizzas.service.discount.DiscountProvider">
@@ -20,13 +26,14 @@
 	</bean>
 	
 	<bean name="discountService"
-	class="com.maven_project.pizzas.service.discount.DiscountService"/>
-	
-	
+	class="com.maven_project.pizzas.service.discount.DiscountService">
+	<constructor-arg ref="discountProvider" />
+	</bean>
 	
 	<bean name="orderService"
 	class="com.maven_project.pizzas.service.order.SimpleOrderService">
 	<constructor-arg ref="orderRepository" />
 	<constructor-arg ref="pizzaRepository" />
+	<constructor-arg ref="discountService" />
 	</bean>
 </beans>

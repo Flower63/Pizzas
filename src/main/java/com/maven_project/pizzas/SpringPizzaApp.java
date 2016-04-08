@@ -20,6 +20,10 @@ public class SpringPizzaApp {
 
     System.out.println(order);
     
+    System.out.println(orderService.countTotalCost(order));
+    
+    System.out.println(orderService.calculateDiscount(order));
+    
     ((AbstractApplicationContext) ac).close();
 	}
 }
