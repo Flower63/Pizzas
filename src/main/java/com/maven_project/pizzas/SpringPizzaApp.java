@@ -6,6 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.maven_project.pizzas.domain.Customer;
 import com.maven_project.pizzas.domain.Order;
+import com.maven_project.pizzas.domain.Pizza;
 import com.maven_project.pizzas.service.order.OrderService;
 
 public class SpringPizzaApp {
@@ -23,6 +24,8 @@ public class SpringPizzaApp {
     System.out.println(orderService.countTotalCost(order));
     
     System.out.println(orderService.calculateDiscount(order));
+    
+    //Pizza p = (Pizza) ac.getBean("pizzaService");
     
     ((AbstractApplicationContext) ac).close();
 	}

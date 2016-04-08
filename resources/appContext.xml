@@ -36,4 +36,20 @@
 	<constructor-arg ref="pizzaRepository" />
 	<constructor-arg ref="discountService" />
 	</bean>
+	
+	<bean id="createPizzaBean" class="com.maven_project.pizzas.CreatePizzaService" />
+	<bean factory-bean="createPizzaBean" factory-method="createPizza">
+	<constructor-arg index="0">
+	<null/>
+	</constructor-arg>
+	<constructor-arg index="1">
+	<value>Some name</value>
+	</constructor-arg>
+	<constructor-arg index="3">
+	<value>2.4</value>
+	</constructor-arg>
+	<constructor-arg index="2">
+	<value>SEA</value>
+	</constructor-arg>
+	</bean>
 </beans>
