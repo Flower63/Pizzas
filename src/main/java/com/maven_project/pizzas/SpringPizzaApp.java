@@ -11,22 +11,24 @@ import com.maven_project.pizzas.service.order.OrderService;
 
 public class SpringPizzaApp {
 	public static void main(String[] args) {
-	Customer customer = new Customer(1, "John", null);
+		Customer customer = new Customer(1, "John", null);
 		
-	ApplicationContext ac = new ClassPathXmlApplicationContext("appContext.xml");
+		ApplicationContext ac = new ClassPathXmlApplicationContext("appContext.xml");
 	
-	OrderService orderService = (OrderService) ac.getBean("orderService");
+		OrderService orderService = (OrderService) ac.getBean("orderService");
 	
-	Order order = orderService.placeNewOrder(customer, 1, 2, 3);
+		Order order = orderService.placeNewOrder(customer, 1, 2, 3);
 
-    System.out.println(order);
+    	System.out.println(order);
     
-    System.out.println(orderService.countTotalCost(order));
+    	System.out.println(orderService.countTotalCost(order));
     
-    System.out.println(orderService.calculateDiscount(order));
+    	System.out.println(orderService.calculateDiscount(order));
     
-    //Pizza p = (Pizza) ac.getBean("pizzaService");
-    
-    ((AbstractApplicationContext) ac).close();
+    	Pizza p = ac.getBean(Pizza.class);
+
+		System.out.println(p);
+
+		((AbstractApplicationContext) ac).close();
 	}
 }

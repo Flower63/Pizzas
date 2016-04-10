@@ -18,7 +18,7 @@ public class InMemPizzaRepository implements PizzaRepository {
 	@Override
 	public Pizza getPizzaByID(Integer id) {
 		for(Pizza p : pizzasList) {
-			if (p.getId().equals(id)) {
+			if (p.getId() == id) {
 				return p;
 			}
 		}

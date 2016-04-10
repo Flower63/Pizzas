@@ -1,19 +1,19 @@
 package com.maven_project.pizzas.domain;
 
 public class Pizza {
-	private Integer id;
+	private int id;
 	private String name;
 	private Type type;
 	private double cost;
 	
-	public Pizza(Integer id, String name, Type type, Double cost) {
+	public Pizza(int id, String name, Type type, Double cost) {
 		this.id = id;
 		this.name = name;
 		this.type = type;
 		this.cost = cost;
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 

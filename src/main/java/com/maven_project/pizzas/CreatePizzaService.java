@@ -4,7 +4,7 @@ import com.maven_project.pizzas.domain.Pizza;
 import com.maven_project.pizzas.domain.Pizza.Type;
 
 public class CreatePizzaService {
-	public Pizza createPizza(Integer id, String name, Type type, Double cost) {
+	public Pizza createPizza(int id, String name, Type type, Double cost) {
 		return new Pizza(id, name, type, cost);
 	}
 }
