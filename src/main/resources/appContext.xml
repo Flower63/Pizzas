@@ -4,12 +4,14 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
         
-	<bean name="pizzaRepository" 
-	class="com.maven_project.pizzas.repository.pizza.InMemPizzaRepository"
-	init-method="cookPizzas" />
-	
-	<bean name="orderRepository"
-	class="com.maven_project.pizzas.repository.order.InMemOrderRepository"/>
+    <!-- <import resource="repositoryContext.xml"/> -->
+    
+    <!-- <ref parent="" /> or <ref bean="" /> -->
+    
+    <bean id="customer" class="com.maven_project.pizzas.Customer">
+    <constructor-arg value="1"/>
+    <constructor-arg value="abc"/>
+    </bean>
 	
 	<bean name="orderService"
 	class="com.maven_project.pizzas.SimpleOrderService">

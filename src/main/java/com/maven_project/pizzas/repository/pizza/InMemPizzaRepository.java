@@ -13,9 +13,9 @@ public class InMemPizzaRepository implements PizzaRepository {
 
 	@PostConstruct
 	public void cookPizzas() {
-		pizzasList.add(new Pizza(1, "Sea pizza 1", Type.SEA));
-		pizzasList.add(new Pizza(2, "Regular pizza 1", Type.REGULAR));
-		pizzasList.add(new Pizza(3, "Vegeterian pizza 1", Type.VEGETERIAN));
+//		pizzasList.add(new Pizza(1, "Sea pizza 1", Type.SEA));
+//		pizzasList.add(new Pizza(2, "Regular pizza 1", Type.REGULAR));
+//		pizzasList.add(new Pizza(3, "Vegeterian pizza 1", Type.VEGETERIAN));
 	}
 
 	@Benchmark
@@ -30,6 +30,10 @@ public class InMemPizzaRepository implements PizzaRepository {
 		return null;
 	}
 	
+	public void setPizzasList(List<Pizza> pizzasList) {
+		this.pizzasList = pizzasList;
+	}
+
 	public void init() {
 		System.out.println("init method in " + this.getClass().getSimpleName());
 	}

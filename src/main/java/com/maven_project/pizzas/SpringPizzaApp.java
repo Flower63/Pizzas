@@ -1,6 +1,7 @@
 package com.maven_project.pizzas;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -13,7 +14,12 @@ public class SpringPizzaApp {
 
         Order order;
         
-		ApplicationContext appContext = new ClassPathXmlApplicationContext("appContext.xml");
+		ConfigurableApplicationContext repositoryContext = new ClassPathXmlApplicationContext("repositoryContext.xml");
+		
+		ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext(new String[] {"appContext.xml"}, false);
+		
+		appContext.setParent(repositoryContext);
+		appContext.refresh();
 		
 		PizzaRepository pr = (PizzaRepository) appContext.getBean("pizzaRepository");
 		
@@ -25,6 +31,14 @@ public class SpringPizzaApp {
 
         System.out.println(order);
 
+        ApplicationContext ap = appContext.getParent();
+        
+        System.out.println(ap);
+        
+        Customer customer2 = repositoryContext.getBean(Customer.class);
+        
+        System.out.println(customer2);
+        
         ((AbstractApplicationContext) appContext).close();
 	}
 
