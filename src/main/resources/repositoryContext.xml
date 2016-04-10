@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+    <bean id="customer" class="com.maven_project.pizzas.Customer">
+    <constructor-arg value="2"/>
+    <constructor-arg value="def"/>
+    </bean>
+        
+	<bean name="pizzaRepository" 
+	class="com.maven_project.pizzas.repository.pizza.InMemPizzaRepository"
+	init-method="cookPizzas">
+		<property name="pizzasList">
+			<list>
+				<bean class="com.maven_project.pizzas.Pizza">
+					<constructor-arg index="0"><value>1</value></constructor-arg>	
+					<constructor-arg index="1"><value>Pizza 1</value></constructor-arg>
+					<constructor-arg index="2"><value>REGULAR</value></constructor-arg>			
+				</bean>
+				<bean class="com.maven_project.pizzas.Pizza">
+					<constructor-arg index="0"><value>2</value></constructor-arg>	
+					<constructor-arg index="1"><value>Pizza 2</value></constructor-arg>
+					<constructor-arg index="2"><value>REGULAR</value></constructor-arg>			
+				</bean>
+				<bean class="com.maven_project.pizzas.Pizza">
+					<constructor-arg index="0"><value>3</value></constructor-arg>	
+					<constructor-arg index="1"><value>Pizza 3</value></constructor-arg>
+					<constructor-arg index="2"><value>REGULAR</value></constructor-arg>			
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean name="orderRepository"
+	class="com.maven_project.pizzas.repository.order.InMemOrderRepository"/>
+        
+</beans>
+       
