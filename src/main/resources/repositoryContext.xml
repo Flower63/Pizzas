@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
         
-    <bean id="customer" class="com.maven_project.pizzas.Customer">
+    <bean id="customer" class="com.maven_project.pizzas.Customer" primary="true">
     <constructor-arg value="2"/>
     <constructor-arg value="def"/>
     </bean>

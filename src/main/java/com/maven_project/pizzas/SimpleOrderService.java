@@ -3,13 +3,21 @@ package com.maven_project.pizzas;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+
 import com.maven_project.pizzas.repository.order.OrderRepository;
 import com.maven_project.pizzas.repository.pizza.PizzaRepository;
 
-public class SimpleOrderService implements OrderService {
+public class SimpleOrderService implements OrderService 
+// ApplicationContextAware
+{
 	
 	private OrderRepository orderRepository;
 	private PizzaRepository pizzaRepository;
+	//private ApplicationContext appContext;
+	private Customer customer;
 	
 	public SimpleOrderService(OrderRepository orderRepository, PizzaRepository pizzaRepository) {
 		this.orderRepository = orderRepository;
@@ -25,11 +33,39 @@ public class SimpleOrderService implements OrderService {
         	pizzas.add(pizzaRepository.getPizzaByID(id));  // get Pizza from predifined in-memory list
         }
 
-        Order newOrder = new Order(customer, pizzas);
+        Order newOrder = createOrder();
+        newOrder.setCustomer(customer);
+        newOrder.setPizzas(pizzas);
 
         orderRepository.saveOrder(newOrder);  // set Order Id and save Order to in-memory list
 
         return newOrder;
 
 	}
+
+	protected Order createOrder()  {
+		//return new Order(customer, pizzas);
+//		Order order = (Order) appContext.getBean("order");
+//		return order;
+		return null;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+//	public void setAppContext(ApplicationContext appContext) {
+//		this.appContext = appContext;
+//	}
+
+//	@Override
+//	public void setApplicationContext(ApplicationContext appContext) throws BeansException {
+//		this.appContext = appContext;
+//	}
+	
+	
 }

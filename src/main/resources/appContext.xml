@@ -8,14 +8,18 @@
     
     <!-- <ref parent="" /> or <ref bean="" /> -->
     
+    <bean name="order" class="com.maven_project.pizzas.Order" scope="prototype"/>
+    
     <bean id="customer" class="com.maven_project.pizzas.Customer">
-    <constructor-arg value="1"/>
-    <constructor-arg value="abc"/>
+    	<constructor-arg value="1"/>
+    	<constructor-arg value="abc"/>
     </bean>
 	
 	<bean name="orderService"
-	class="com.maven_project.pizzas.SimpleOrderService">
-	<constructor-arg ref="orderRepository" />
-	<constructor-arg ref="pizzaRepository" />
+	class="com.maven_project.pizzas.SimpleOrderService" autowire="byType">
+		<constructor-arg ref="orderRepository" />
+		<constructor-arg ref="pizzaRepository" />
+		<!-- <property name="order" ref="order" /> -->
+		<lookup-method name="createOrder" bean="order"/>
 	</bean>
 </beans>
