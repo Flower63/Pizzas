@@ -1,7 +1,5 @@
 package com.maven_project.pizzas.domain;
 
-import com.maven_project.pizzas.service.card.AccumulativeCard;
-
 public class Customer {
 	private int id;
 	private String name;

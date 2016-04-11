@@ -3,15 +3,17 @@ package com.maven_project.pizzas.service.order;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.maven_project.pizzas.domain.Customer;
 import com.maven_project.pizzas.domain.Order;
 import com.maven_project.pizzas.domain.Pizza;
-import com.maven_project.pizzas.repository.order.InMemOrderRepository;
 import com.maven_project.pizzas.repository.order.OrderRepository;
-import com.maven_project.pizzas.repository.pizza.InMemPizzaRepository;
 import com.maven_project.pizzas.repository.pizza.PizzaRepository;
 import com.maven_project.pizzas.service.discount.DiscountService;
 
+@Service(value="orderService")
 public class SimpleOrderService implements OrderService {
 
 	private static final int MAX_PIZZAS_NUMBER = 10;
@@ -20,6 +22,7 @@ public class SimpleOrderService implements OrderService {
 	private PizzaRepository pizzaRepository;
 	private DiscountService discountService;
 	
+	@Autowired
 	public SimpleOrderService(OrderRepository orderRepository, PizzaRepository pizzaRepository,
 			DiscountService discountService) {
 		this.orderRepository = orderRepository;
@@ -94,5 +97,17 @@ public class SimpleOrderService implements OrderService {
 	@Override
 	public double calculateDiscount(Order order) {
 		return discountService.countDiscount(order);
+	}
+
+	public void setOrderRepository(OrderRepository orderRepository) {
+		this.orderRepository = orderRepository;
+	}
+
+	public void setPizzaRepository(PizzaRepository pizzaRepository) {
+		this.pizzaRepository = pizzaRepository;
+	}
+
+	public void setDiscountService(DiscountService discountService) {
+		this.discountService = discountService;
 	}
 }
