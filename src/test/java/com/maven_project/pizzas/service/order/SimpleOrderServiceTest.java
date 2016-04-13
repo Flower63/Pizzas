@@ -3,6 +3,8 @@ package com.maven_project.pizzas.service.order;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.List;
+
 import com.maven_project.pizzas.domain.Customer;
 import com.maven_project.pizzas.domain.Order;
 import com.maven_project.pizzas.domain.Pizza;
@@ -28,7 +30,13 @@ public class SimpleOrderServiceTest {
 		discountService = mock(DiscountService.class);
 		customer = mock(Customer.class);
 		
-		orderService = new SimpleOrderService(orderRepository, pizzaRepository, discountService);
+		orderService = new SimpleOrderService(orderRepository, pizzaRepository, discountService){
+
+			@Override
+			protected Order getOrder(Customer customer, List<Pizza> pizzas) {
+				return new Order(customer, pizzas);
+			}
+		};
 	}
 
 	@Test

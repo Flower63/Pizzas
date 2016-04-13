@@ -7,7 +7,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component(value = "order")
+import com.maven_project.pizzas.*;
+
+//@Component(value = "order")
+@Domain
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Order {
 	
