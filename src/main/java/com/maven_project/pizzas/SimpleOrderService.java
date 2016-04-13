@@ -3,10 +3,7 @@ package com.maven_project.pizzas;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-
+import com.maven_project.pizzas.ifrastructure.Benchmark;
 import com.maven_project.pizzas.repository.order.OrderRepository;
 import com.maven_project.pizzas.repository.pizza.PizzaRepository;
 
@@ -24,6 +21,7 @@ public class SimpleOrderService implements OrderService
 		this.pizzaRepository = pizzaRepository;
 	}
 
+	@Benchmark
 	@Override
 	public Order placeNewOrder(Customer customer, Integer ... pizzasID) {
 

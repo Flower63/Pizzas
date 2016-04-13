@@ -4,7 +4,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.util.SocketUtils;
 
 import com.maven_project.pizzas.repository.pizza.PizzaRepository;
 
@@ -30,7 +29,8 @@ public class SpringPizzaApp {
         //((SimpleOrderService) orderService).setAppContext(appContext);
         order = orderService.placeNewOrder(customer, 1, 2, 3);
         
-        System.out.println(((SimpleOrderService) orderService).getCustomer());
+        //System.out.println(((SimpleOrderService) orderService).getCustomer());
+        
         
         System.out.println(orderService.getClass());
 
