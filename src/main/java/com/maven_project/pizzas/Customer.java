@@ -1,13 +1,18 @@
 package com.maven_project.pizzas;
 
-public class Customer {
+import org.springframework.beans.factory.FactoryBean;
+
+public class Customer implements FactoryBean<Customer> {
 	private int id;
 	private String name;
 	
 	public Customer(int id, String name) {
-		super();
 		this.id = id;
 		this.name = name;
+	}
+
+	public Customer() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getId() {
@@ -29,5 +34,20 @@ public class Customer {
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", name=" + name + "]";
+	}
+
+	@Override
+	public Customer getObject() throws Exception {
+		return new Customer(3, "Name");
+	}
+
+	@Override
+	public Class<?> getObjectType() {
+		return Customer.class;
+	}
+
+	@Override
+	public boolean isSingleton() {
+		return false;
 	}
 }

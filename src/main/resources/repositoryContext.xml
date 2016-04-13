@@ -4,10 +4,11 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
         
-    <bean id="customer" class="com.maven_project.pizzas.Customer" primary="true">
+<!--    <bean id="customer" class="com.maven_project.pizzas.Customer" primary="true">
     <constructor-arg value="2"/>
     <constructor-arg value="def"/>
     </bean>
+    -->
         
 	<bean name="pizzaRepository" 
 	class="com.maven_project.pizzas.repository.pizza.InMemPizzaRepository"
@@ -35,6 +36,8 @@
 	
 	<bean name="orderRepository"
 	class="com.maven_project.pizzas.repository.order.InMemOrderRepository"/>
+	
+	<bean class="com.maven_project.pizzas.Customer"/>
         
 </beans>
        

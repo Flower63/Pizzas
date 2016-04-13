@@ -10,10 +10,13 @@
     
     <bean name="order" class="com.maven_project.pizzas.Order" scope="prototype"/>
     
-    <bean id="customer" class="com.maven_project.pizzas.Customer">
+<!--     <bean id="customer" class="com.maven_project.pizzas.Customer">
     	<constructor-arg value="1"/>
     	<constructor-arg value="abc"/>
     </bean>
+-->
+
+	<bean class="com.maven_project.pizzas.ifrastructure.BenchmarkProxyBeanPostProcessor"/>
 	
 	<bean name="orderService"
 	class="com.maven_project.pizzas.SimpleOrderService" autowire="byType">
