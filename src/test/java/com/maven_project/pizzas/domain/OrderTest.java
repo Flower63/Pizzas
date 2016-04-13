@@ -1,11 +1,15 @@
 package com.maven_project.pizzas.domain;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 import java.util.ArrayList;
 
-public class OrderTest extends TestCase {
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
+public class OrderTest {
+
+    @Test
     public void testSetPizzas() throws Exception {
         Order order = new Order(null, null);
 
@@ -24,6 +28,7 @@ public class OrderTest extends TestCase {
         Order.discardCounter();
     }
 
+    @Test
     public void testProceedOrder() throws Exception {
         Order order = new Order(null, null);
 
@@ -44,6 +49,7 @@ public class OrderTest extends TestCase {
         Order.discardCounter();
     }
 
+    @Test
     public void testCancelOrder() throws Exception {
         Order order = new Order(null, null);
 

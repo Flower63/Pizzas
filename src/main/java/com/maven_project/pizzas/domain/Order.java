@@ -1,7 +1,14 @@
 package com.maven_project.pizzas.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component(value = "order")
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Order {
 	
 	private static long counter;
@@ -10,12 +17,15 @@ public class Order {
 	private Customer customer;
 	private List<Pizza> pizzas;
 	private State state;
+	private boolean isDiscountsApplicable;
 
+	@Autowired
 	public Order(Customer customer, List<Pizza> pizzas) {
 		this.customer = customer;
 		this.pizzas = pizzas;
 		this.state = State.NEW;
 		this.id = ++counter;
+		this.isDiscountsApplicable = true;
 	}
 
 	public Long getId() {
@@ -68,8 +78,16 @@ public class Order {
 		
 		return result.toString();
 	}
-	
-	public static enum State {
+
+	public boolean isDiscountsApplicable() {
+		return isDiscountsApplicable;
+	}
+
+	public void setDiscountsApplicable(boolean discountsApplicable) {
+		isDiscountsApplicable = discountsApplicable;
+	}
+
+	public enum State {
 		NEW {
 			public State nextState() {
 				return IN_PROGRESS;

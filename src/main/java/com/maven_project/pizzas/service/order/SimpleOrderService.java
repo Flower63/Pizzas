@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.stereotype.Service;
 
 import com.maven_project.pizzas.domain.Customer;
@@ -32,6 +33,9 @@ public class SimpleOrderService implements OrderService {
 
 	@Override
 	public Order placeNewOrder(Customer customer, Integer ... pizzasID) {
+		if (customer == null) {
+			throw new IllegalArgumentException("Customer cannot be null");
+		}
 		
 		// Temporally solution
 		if (pizzasID.length > MAX_PIZZAS_NUMBER) {
@@ -56,11 +60,17 @@ public class SimpleOrderService implements OrderService {
 	}
 	
 	private Order saveOrder(Customer customer, List<Pizza> pizzas) {
-		Order newOrder = new Order(customer, pizzas);
+		Order newOrder = getOrder(customer, pizzas);
 
         orderRepository.saveOrder(newOrder);
         
         return newOrder;
+	}
+
+	@Lookup(value = "order")
+	protected Order getOrder(Customer customer, List<Pizza> pizzas) {
+		//return new Order(customer, pizzas);
+		return null;
 	}
 
 	@Override

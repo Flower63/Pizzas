@@ -1,7 +1,6 @@
 package com.maven_project.pizzas;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.maven_project.pizzas.domain.Customer;
@@ -12,9 +11,14 @@ public class SpringPizzaApp {
 	public static void main(String[] args) {
 		Customer customer = new Customer(1, "John", null);
 		
-		ApplicationContext ac = new ClassPathXmlApplicationContext("appContext.xml");
+		ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext(new String[] {"appContext.xml"}, false);
+
+		ConfigurableApplicationContext repositoryContext = new ClassPathXmlApplicationContext("repositoryContext.xml");
+
+		appContext.setParent(repositoryContext);
+		appContext.refresh();
 	
-		OrderService orderService = (OrderService) ac.getBean("orderService");
+		OrderService orderService = (OrderService) appContext.getBean("orderService");
 	
 		Order order = orderService.placeNewOrder(customer, 1, 2, 3);
 
@@ -24,10 +28,10 @@ public class SpringPizzaApp {
     
     	System.out.println(orderService.calculateDiscount(order));
     
-    	//Pizza p = ac.getBean(Pizza.class);
+    	//Pizza p = appContext.getBean(Pizza.class);
 
 		//System.out.println(p);
 
-		((AbstractApplicationContext) ac).close();
+		appContext.close();
 	}
 }

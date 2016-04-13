@@ -1,6 +1,7 @@
 package com.maven_project.pizzas.service.discount;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -22,15 +23,16 @@ public class DiscountProvider {
 	}
 
 	@PostConstruct
-	public void prepareDiscounds() {
+	public void prepareDiscounts() {
 		discounts.add(new DiscountAccumulativeCard(cardService));
 		discounts.add(new DiscountMostExpPizza());
 	}
 	
 	public List<Discount> getDiscounts(Order order) {
-		/*
-		 * Here must be some complex logic to create list of discounts
-		 */
-		return discounts;
+		if (order.isDiscountsApplicable()) {
+			return discounts;
+		}
+
+		return Collections.emptyList();
 	}
 }
