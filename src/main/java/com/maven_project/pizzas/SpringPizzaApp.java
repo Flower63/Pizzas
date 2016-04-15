@@ -31,7 +31,6 @@ public class SpringPizzaApp {
         
         //System.out.println(((SimpleOrderService) orderService).getCustomer());
         
-        
         System.out.println(orderService.getClass());
 
         System.out.println(order);

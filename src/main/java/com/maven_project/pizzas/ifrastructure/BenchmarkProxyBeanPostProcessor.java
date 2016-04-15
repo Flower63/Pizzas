@@ -3,7 +3,9 @@ package com.maven_project.pizzas.ifrastructure;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -16,8 +18,7 @@ public class BenchmarkProxyBeanPostProcessor implements BeanPostProcessor {
 		
 		for(Method m : methods) {
 			if (m.isAnnotationPresent(Benchmark.class) && m.getAnnotation(Benchmark.class).active()) {
-				System.out.println(Arrays.toString(bean.getClass().getInterfaces()));
-				return Proxy.newProxyInstance(bean.getClass().getClassLoader(), bean.getClass().getSuperclass().getInterfaces(), new BeanProxy(bean));	
+				return createProxy(bean);
 			}
 		}
 		
@@ -27,6 +28,26 @@ public class BenchmarkProxyBeanPostProcessor implements BeanPostProcessor {
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String name) throws BeansException {
 		return bean;
+	}
+
+	private Object createProxy(Object target) {
+		Class<?> clazz = target.getClass();
+		ClassLoader classLoader = clazz.getClassLoader();
+		Class<?>[] interfaces = findInterfaces(clazz);
+		InvocationHandler handler = new BeanProxy(target);
+
+		return Proxy.newProxyInstance(classLoader, interfaces, handler);
+	}
+
+	private Class<?>[] findInterfaces(Class<?> clazz) {
+		List<Class<?>> result = new ArrayList<>();
+
+		while (!clazz.equals(Object.class)) {
+			result.addAll(Arrays.asList(clazz.getInterfaces()));
+			clazz = clazz.getSuperclass();
+		}
+
+		return result.toArray(new Class<?>[0]);
 	}
 
 	private static class BeanProxy implements InvocationHandler {
@@ -44,7 +65,7 @@ public class BenchmarkProxyBeanPostProcessor implements BeanPostProcessor {
 				Object result = method.invoke(obj, args);
 				long after = System.nanoTime();
 
-				System.out.println((after - before) / 1000000d);
+				System.out.println(method.getName() + " " + (after - before) / 1000000d);
 
 				return result;
 			}

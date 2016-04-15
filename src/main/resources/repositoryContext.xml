@@ -33,6 +33,8 @@
 			</list>
 		</property>
 	</bean>
+
+	<bean class="com.maven_project.pizzas.ifrastructure.BenchmarkProxyBeanPostProcessor"/>
 	
 	<bean name="orderRepository"
 	class="com.maven_project.pizzas.repository.order.InMemOrderRepository"/>
