@@ -18,6 +18,11 @@ public class SpringPizzaApp {
 		
 		ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext(new String[] {"appContext.xml"}, false);
 		
+		repositoryContext.getEnvironment().setActiveProfiles("dev");
+		//repositoryContext.setEnvironment(repositoryContext.getEnvironment().setActiveProfiles("dev"));
+		
+		repositoryContext.refresh();
+		
 		appContext.setParent(repositoryContext);
 		appContext.refresh();
 		
