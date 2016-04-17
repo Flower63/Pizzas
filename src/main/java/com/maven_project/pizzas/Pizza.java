@@ -4,11 +4,13 @@ public class Pizza {
 	private Integer id;
 	private String name;
 	private Type type;
+	private double cost;
 	
-	public Pizza(Integer id, String name, Type type) {
+	public Pizza(Integer id, String name, Type type, double cost) {
 		this.id = id;
 		this.name = name;
 		this.type = type;
+		this.cost = cost;
 	}
 
 	public Integer getId() {

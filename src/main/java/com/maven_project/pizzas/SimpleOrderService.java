@@ -21,7 +21,7 @@ public class SimpleOrderService implements OrderService
 		this.pizzaRepository = pizzaRepository;
 	}
 
-	@Benchmark
+	//@Benchmark
 	@Override
 	public Order placeNewOrder(Customer customer, Integer ... pizzasID) {
 

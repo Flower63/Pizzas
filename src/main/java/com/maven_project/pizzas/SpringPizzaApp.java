@@ -32,7 +32,7 @@ public class SpringPizzaApp {
 
         OrderService orderService = (OrderService) appContext.getBean("orderService");
         //((SimpleOrderService) orderService).setAppContext(appContext);
-        order = orderService.placeNewOrder(customer, 1, 2, 3);
+        order = orderService.placeNewOrder(customer, 1, 2);
         
         //System.out.println(((SimpleOrderService) orderService).getCustomer());
         

@@ -21,7 +21,8 @@
 	<bean name="orderService"
 	class="com.maven_project.pizzas.SimpleOrderService" autowire="byType">
 		<constructor-arg ref="orderRepository" />
-		<constructor-arg ref="pizzaRepository" />
+		<constructor-arg ref="pgPizzaRepository" />
+		<!--<constructor-arg ref="pizzaRepository" />-->
 		<!-- <property name="order" ref="order" /> -->
 		<lookup-method name="createOrder" bean="order"/>
 	</bean>
