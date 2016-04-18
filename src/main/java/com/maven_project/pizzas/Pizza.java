@@ -1,8 +1,14 @@
 package com.maven_project.pizzas;
 
+import javax.persistence.*;
+
+@Entity
 public class Pizza {
+	@Id
 	private Integer id;
 	private String name;
+	@Column(name="pizza_type")
+	@Enumerated(EnumType.ORDINAL)
 	private Type type;
 	private double cost;
 	
@@ -11,6 +17,9 @@ public class Pizza {
 		this.name = name;
 		this.type = type;
 		this.cost = cost;
+	}
+
+	public Pizza() {
 	}
 
 	public Integer getId() {
@@ -37,7 +46,20 @@ public class Pizza {
 		this.type = type;
 	}
 
+	public double getCost() {
+		return cost;
+	}
+
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public static enum Type {
 		SEA, VEGETERIAN, REGULAR
 	}
+	
 }
