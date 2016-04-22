@@ -1,12 +1,31 @@
 package com.maven_project.pizzas;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyClass;
+import javax.persistence.Transient;
+
+@Entity(name="orders")
 public class Order {
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private Long id;
+	@ManyToOne
 	private Customer customer;
+	//@ElementCollection(Pizza.class)
+	@Transient
 	private List<Pizza> pizzas;
+	//@ElementCollection
+	//@MapKeyClass(Pizza.class)
+	@Transient
 	private Map<Pizza, Integer> orders;
 	/* TODO add date */
 	/* TODO add address */
@@ -14,6 +33,7 @@ public class Order {
 	public Order(Customer customer, List<Pizza> pizzas) {
 		this.customer = customer;
 		this.pizzas = pizzas;
+		this.orders = new HashMap<>();
 		fillMap(pizzas);
 	}
 	
@@ -53,5 +73,13 @@ public class Order {
 				orders.put(p, 0);
 			}
 		}
+	}
+
+	public Map<Pizza, Integer> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Map<Pizza, Integer> orders) {
+		this.orders = orders;
 	}
 }

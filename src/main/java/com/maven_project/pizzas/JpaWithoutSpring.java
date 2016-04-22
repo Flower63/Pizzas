@@ -2,6 +2,7 @@ package com.maven_project.pizzas;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Scanner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,7 +14,7 @@ public class JpaWithoutSpring {
 		EntityManagerFactory emf = null; 
 		EntityManager em = null;
 		
-		//try {
+		try {
 			emf = Persistence.createEntityManagerFactory("jpa");
 			em = emf.createEntityManager();
 		
@@ -29,23 +30,43 @@ public class JpaWithoutSpring {
 			
 			Address adr = new Address();
 			adr.setActualy("address");
+			adr.setState(new State("Some state"));
 			
-			Customer customer = new Customer();
+			Customer customer = new RegistratedCustomer();
 			//customer.setId(1);
 			customer.setName("Pizza man");
 			customer.setAddress(adr);
 			customer.setPhones(Arrays.asList("dfgdlfgk", "fdgdfg"));
 			customer.setAddresses(Arrays.asList(adr, adr));
 			
+			adr.setCustomer(customer);
+			
 			em.getTransaction().begin();
+			em.persist(adr);
 			em.persist(customer);
 			em.getTransaction().commit();
 			
-			//Pizza p = em.find(Pizza.class, 2);
-			//System.out.println(p);
-//		} finally {
-//			em.close();
-//			emf.close();
-//		}
+//			Order order = new Order(customer, Arrays.asList(pizza, pizza));
+//			em.getTransaction().begin();
+//			em.persist(order);
+//			em.getTransaction().commit();
+			
+			em.clear();
+			
+			Pizza p = em.find(Pizza.class, 2);
+			
+			System.out.println(p);
+			
+			Customer c = em.find(Customer.class, customer.getId());
+			System.out.println(c);
+			
+			Address a = em.find(Address.class, adr.getId());
+			System.out.println(a.getCustomer());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			em.close();
+			emf.close();
+		}
 	}
 }

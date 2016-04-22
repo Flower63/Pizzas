@@ -2,29 +2,46 @@ package com.maven_project.pizzas;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 
 import org.springframework.beans.factory.FactoryBean;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING)
 public class Customer implements FactoryBean<Customer> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
 	private String name;
-	@Embedded
-	@Column(name="ADDR")
+	//@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE} )
+	//@OneToMany(mappedBy = "customer")
+	@Transient
 	private Address address;
-	@ElementCollection
+	@ElementCollection(fetch=FetchType.EAGER)
 	private List<String> phones;
-	@ElementCollection
+	//@ElementCollection
+	//@Transient
+	@OneToMany(mappedBy = "customer")
 	List<Address> addresses;
+	@Version
+	private Integer version;
 	
 	public List<Address> getAddresses() {
 		return addresses;
