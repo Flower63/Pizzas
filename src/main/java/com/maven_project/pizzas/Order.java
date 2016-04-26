@@ -4,14 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyClass;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 @Entity(name="orders")
 public class Order {
@@ -23,9 +16,13 @@ public class Order {
 	//@ElementCollection(Pizza.class)
 	@Transient
 	private List<Pizza> pizzas;
-	//@ElementCollection
+	@ElementCollection
+	@CollectionTable(name = "order_pizzas")
+	@MapKeyJoinColumn(name = "ord_id")
 	//@MapKeyClass(Pizza.class)
-	@Transient
+	//@ManyToMany
+	//@JoinTable(name = "order_pizzas")
+	//@Transient
 	private Map<Pizza, Integer> orders;
 	/* TODO add date */
 	/* TODO add address */
@@ -70,7 +67,7 @@ public class Order {
 				int quantity = orders.get(p);
 				orders.put(p, ++quantity);
 			} else {
-				orders.put(p, 0);
+				orders.put(p, 1);
 			}
 		}
 	}

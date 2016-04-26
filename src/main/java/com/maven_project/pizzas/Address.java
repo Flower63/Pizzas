@@ -1,15 +1,6 @@
 package com.maven_project.pizzas;
 
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
 
@@ -27,8 +18,9 @@ public class Address {
 	//@Type(type="org.hibernate.type.TextType")
 	private State state;
 	//@OneToOne(mappedBy="address")
-	@ManyToOne//(optional=false)
-	@JoinTable(name="cust_addr")
+	//@ManyToOne//(optional=false)
+	//@JoinTable(name="cust_addr")
+	@Transient
 	private Customer customer;
 
 	public String getActualy() {

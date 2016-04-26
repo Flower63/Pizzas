@@ -36,9 +36,9 @@ public class Customer implements FactoryBean<Customer> {
 	private Address address;
 	@ElementCollection(fetch=FetchType.EAGER)
 	private List<String> phones;
-	//@ElementCollection
+	@ElementCollection
 	//@Transient
-	@OneToMany(mappedBy = "customer")
+	//@OneToMany//(mappedBy = "customer")
 	List<Address> addresses;
 	@Version
 	private Integer version;

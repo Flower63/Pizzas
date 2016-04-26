@@ -19,13 +19,18 @@ public class JpaWithoutSpring {
 			em = emf.createEntityManager();
 		
 			Pizza pizza = new Pizza();
-			//pizza.setId(2);
 			pizza.setName("Margo");
 			pizza.setType(Pizza.Type.SEA);
 			pizza.setCost(120.3);
+
+			Pizza pizzaReg = new Pizza();
+			pizzaReg.setName("Regular");
+			pizzaReg.setType(Pizza.Type.REGULAR);
+			pizzaReg.setCost(150.5);
 			
 			em.getTransaction().begin();
 			em.persist(pizza);
+			em.persist(pizzaReg);
 			em.getTransaction().commit();
 			
 			Address adr = new Address();
@@ -37,7 +42,7 @@ public class JpaWithoutSpring {
 			customer.setName("Pizza man");
 			customer.setAddress(adr);
 			customer.setPhones(Arrays.asList("dfgdlfgk", "fdgdfg"));
-			customer.setAddresses(Arrays.asList(adr, adr));
+			customer.setAddresses(Arrays.asList(adr));
 			
 			adr.setCustomer(customer);
 			
@@ -45,11 +50,11 @@ public class JpaWithoutSpring {
 			em.persist(adr);
 			em.persist(customer);
 			em.getTransaction().commit();
-			
-//			Order order = new Order(customer, Arrays.asList(pizza, pizza));
-//			em.getTransaction().begin();
-//			em.persist(order);
-//			em.getTransaction().commit();
+
+			Order order = new Order(customer, Arrays.asList(pizza, pizza, pizzaReg));
+			em.getTransaction().begin();
+			em.persist(order);
+			em.getTransaction().commit();
 			
 			em.clear();
 			

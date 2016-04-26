@@ -62,5 +62,22 @@ public class Pizza {
 	public static enum Type {
 		SEA, VEGETERIAN, REGULAR
 	}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Pizza)) return false;
+
+		Pizza pizza = (Pizza) o;
+
+		if (Double.compare(pizza.getCost(), getCost()) != 0) return false;
+		if (!getId().equals(pizza.getId())) return false;
+		if (!getName().equals(pizza.getName())) return false;
+		return getType() == pizza.getType();
+	}
+
+	@Override
+	public int hashCode() {
+		return name.hashCode();
+	}
 }
