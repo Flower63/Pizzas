@@ -5,6 +5,8 @@ import com.maven_project.pizzas.domain.Pizza;
 import com.maven_project.pizzas.service.card.AccumulativeCard;
 import com.maven_project.pizzas.service.card.AccumulativeCardService;
 
+import java.util.Map;
+
 public class DiscountAccumulativeCard implements Discount {
 	private final AccumulativeCardService cardService;
 
@@ -33,9 +35,9 @@ public class DiscountAccumulativeCard implements Discount {
 
 	private double countTotalCost(Order order) {
 		double total = 0;
-		
-		for (Pizza pizza : order.getPizzas()) {
-			total += pizza.getCost();
+
+		for (Map.Entry<Pizza, Integer> entry : order.getPizzas().entrySet()) {
+			total += (entry.getKey().getCost() * entry.getValue());
 		}
 		
 		return total;

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.util.List;
+import java.util.Map;
 
 import com.maven_project.pizzas.domain.Customer;
 import com.maven_project.pizzas.domain.Order;
@@ -33,7 +34,7 @@ public class SimpleOrderServiceTest {
 		orderService = new SimpleOrderService(orderRepository, pizzaRepository, discountService){
 
 			@Override
-			protected Order getOrder(Customer customer, List<Pizza> pizzas) {
+			protected Order getOrder(Customer customer, Map<Pizza, Integer> pizzas) {
 				return new Order(customer, pizzas);
 			}
 		};

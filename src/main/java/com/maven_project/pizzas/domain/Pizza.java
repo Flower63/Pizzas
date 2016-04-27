@@ -1,9 +1,20 @@
 package com.maven_project.pizzas.domain;
 
+import javax.persistence.*;
+
+@Entity
 public class Pizza {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
+
 	private String name;
+
+	@Enumerated(value = EnumType.STRING)
+	@Column(name = "PIZZA_TYPE")
 	private Type type;
+
 	private double cost;
 	
 	public Pizza(int id, String name, Type type, Double cost) {
@@ -11,6 +22,9 @@ public class Pizza {
 		this.name = name;
 		this.type = type;
 		this.cost = cost;
+	}
+
+	public Pizza() {
 	}
 
 	public int getId() {
@@ -45,12 +59,29 @@ public class Pizza {
 		this.cost = cost;
 	}
 
-	public static enum Type {
+	public enum Type {
 		SEA, VEGETERIAN, REGULAR
 	}
 
 	@Override
 	public String toString() {
 		return "Pizza [id=" + id + ", name=" + name + ", type=" + type + "]";
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Pizza)) return false;
+
+		Pizza pizza = (Pizza) o;
+
+		if (getId() != pizza.getId()) return false;
+		return getName().equals(pizza.getName());
+
+	}
+
+	@Override
+	public int hashCode() {
+		return getName().hashCode();
 	}
 }

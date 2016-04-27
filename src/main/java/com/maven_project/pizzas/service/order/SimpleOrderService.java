@@ -1,7 +1,7 @@
 package com.maven_project.pizzas.service.order;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Lookup;
@@ -42,35 +42,45 @@ public class SimpleOrderService implements OrderService {
 			throw new IllegalArgumentException();
 		}
 
-        List<Pizza> pizzas = findPizzas(pizzasID);
+		Map<Pizza, Integer> pizzas = findPizzas(pizzasID);
 
         Order newOrder = saveOrder(customer, pizzas);
 
         return newOrder;
 	}
 	
-	private List<Pizza> findPizzas(Integer ... pizzasID) {
-		List<Pizza> pizzas = new ArrayList<>();
+	private Map<Pizza, Integer> findPizzas(Integer ... pizzasID) {
+		Map<Pizza, Integer> pizzas = new HashMap<>();
 
         for(Integer id : pizzasID) {
-        	pizzas.add(pizzaRepository.getPizzaByID(id));
+			Pizza pizza = pizzaRepository.getPizzaByID(id);
+			if (pizza == null) {
+				continue;
+			}
+
+			if (pizzas.containsKey(pizza)) {
+				int quantity = pizzas.get(pizza);
+				pizzas.put(pizza, ++quantity);
+			} else {
+				pizzas.put(pizza, 1);
+			}
         }
         
         return pizzas;
 	}
 	
-	private Order saveOrder(Customer customer, List<Pizza> pizzas) {
+	private Order saveOrder(Customer customer, Map<Pizza, Integer> pizzas) {
 		Order newOrder = getOrder(customer, pizzas);
 
-        orderRepository.saveOrder(newOrder);
+        long id = orderRepository.saveOrder(newOrder);
+		newOrder.setId(id);
         
         return newOrder;
 	}
 
 	@Lookup(value = "order")
-	protected Order getOrder(Customer customer, List<Pizza> pizzas) {
-		//return new Order(customer, pizzas);
-		return null;
+	protected Order getOrder(Customer customer, Map<Pizza, Integer> pizzas) {
+		return new Order(customer, pizzas);
 	}
 
 	@Override
@@ -79,13 +89,13 @@ public class SimpleOrderService implements OrderService {
 	}
 
 	@Override
-	public boolean alterOrder(Order order, List<Pizza> pizzas) {
+	public boolean alterOrder(Order order, Map<Pizza, Integer> pizzas) {
 
 		if (pizzas.size() > MAX_PIZZAS_NUMBER) {
 			return false;
 		}
 
-		return order.setPizzas(pizzas);
+		return order.changeOrder(pizzas);
 	}
 
 	@Override
@@ -97,8 +107,8 @@ public class SimpleOrderService implements OrderService {
 	public double countTotalCost(Order order) {
 		double total = 0;
 		
-		for (Pizza pizza : order.getPizzas()) {
-			total += pizza.getCost();
+		for (Map.Entry<Pizza, Integer> entry : order.getPizzas().entrySet()) {
+			total += (entry.getKey().getCost() * entry.getValue());
 		}
 		
 		return total;

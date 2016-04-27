@@ -1,14 +1,27 @@
 package com.maven_project.pizzas.domain;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
 public class Customer {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
+
 	private String name;
-	private Address address;
-	
-	public Customer(int id, String name, Address address) {
+
+	@ElementCollection(fetch = FetchType.EAGER)
+	private List<Address> addresses;
+
+	public Customer() {
+	}
+
+	public Customer(int id, String name, List<Address> addresses) {
 		this.id = id;
 		this.name = name;
-		this.address = address;
+		this.addresses = addresses;
 	}
 
 	public int getId() {
@@ -27,11 +40,11 @@ public class Customer {
 		this.name = name;
 	}
 
-	public Address getAddress() {
-		return address;
+	public List<Address> getAddresses() {
+		return addresses;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
 }

@@ -3,6 +3,7 @@ package com.maven_project.pizzas.domain;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -15,17 +16,15 @@ public class OrderTest {
 
         assertTrue(order.getPizzas() == null);
 
-        assertTrue(order.setPizzas(new ArrayList<>()));
+        assertTrue(order.changeOrder(new HashMap<>()));
 
         assertFalse(order.getPizzas() == null);
 
         order.proceedOrder();
 
-        assertFalse(order.setPizzas(null));
+        assertFalse(order.changeOrder(null));
 
         assertFalse(order.getPizzas() == null);
-
-        Order.discardCounter();
     }
 
     @Test
@@ -45,8 +44,6 @@ public class OrderTest {
         order.proceedOrder();
 
         assertTrue(order.getState() == Order.State.DONE);
-
-        Order.discardCounter();
     }
 
     @Test
@@ -62,7 +59,5 @@ public class OrderTest {
         order.proceedOrder();
 
         assertTrue(order.getState() == Order.State.CANCELED);
-
-        Order.discardCounter();
     }
 }

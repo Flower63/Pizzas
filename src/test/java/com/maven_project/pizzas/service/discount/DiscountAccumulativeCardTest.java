@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -42,7 +43,8 @@ public class DiscountAccumulativeCardTest {
 
     @Test
     public void testCountDiscountNoCard() throws Exception {
-        Order order = new Order(customer, Arrays.asList(simplePizza, simplePizza, simplePizza, simplePizza));
+        //Order order = new Order(customer, Arrays.asList(simplePizza, simplePizza, simplePizza, simplePizza));
+        Order order = new Order(customer, new HashMap<>());
 
         // Not more than 4 pizzas, no accumulative card
         double totalDiscount = discount.countDiscount(order);
@@ -55,7 +57,8 @@ public class DiscountAccumulativeCardTest {
         Pizza expensivePizza = mock(Pizza.class);
         when(expensivePizza.getCost()).thenReturn(100D);
 
-        Order order = new Order(customer, Arrays.asList(simplePizza, simplePizza, simplePizza, simplePizza, expensivePizza));
+        //Order order = new Order(customer, Arrays.asList(simplePizza, simplePizza, simplePizza, simplePizza, expensivePizza));
+        Order order = new Order(customer, new HashMap<>());
 
         // More than 4 pizzas, no accumulative card
         double totalDiscount = discount.countDiscount(order);
@@ -73,7 +76,7 @@ public class DiscountAccumulativeCardTest {
         Pizza expensivePizza = mock(Pizza.class);
         when(expensivePizza.getCost()).thenReturn(100D);
 
-        Order order = new Order(customer, Arrays.asList(simplePizza, simplePizza, simplePizza, simplePizza, expensivePizza));
+        Order order = new Order(customer, new HashMap<>());
 
         // More than 4 pizzas, with accumulative card
         double totalDiscount = discount.countDiscount(order);
