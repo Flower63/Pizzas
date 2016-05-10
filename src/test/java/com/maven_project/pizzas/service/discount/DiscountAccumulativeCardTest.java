@@ -1,10 +1,10 @@
 package com.maven_project.pizzas.service.discount;
 
+import com.maven_project.pizzas.domain.AccumulativeCard;
 import com.maven_project.pizzas.domain.Customer;
 import com.maven_project.pizzas.domain.Order;
 import com.maven_project.pizzas.domain.Pizza;
-import com.maven_project.pizzas.service.card.AccumulativeCard;
-import com.maven_project.pizzas.service.card.AccumulativeCardService;
+import com.maven_project.pizzas.service.card.SimpleCardService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,14 +26,14 @@ public class DiscountAccumulativeCardTest {
 
     private static final double DELTA = 1e-15;
 
-    AccumulativeCardService cardService;
+    SimpleCardService cardService;
     Customer customer;
     Pizza simplePizza;
     DiscountAccumulativeCard discount;
 
     @Before
     public void init() {
-        cardService = mock(AccumulativeCardService.class);
+        cardService = mock(SimpleCardService.class);
         customer = mock(Customer.class);
         simplePizza = mock(Pizza.class);
         discount = new DiscountAccumulativeCard(cardService);
@@ -71,7 +71,7 @@ public class DiscountAccumulativeCardTest {
         AccumulativeCard card = new AccumulativeCard();
         card.setTotalAmount(100);
 
-        when(cardService.findCard(any(Customer.class))).thenReturn(card);
+        when(cardService.findCardByCustomer(any(Customer.class))).thenReturn(card);
 
         Pizza expensivePizza = mock(Pizza.class);
         when(expensivePizza.getCost()).thenReturn(100D);

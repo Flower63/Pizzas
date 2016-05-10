@@ -1,35 +1,69 @@
 package com.maven_project.pizzas.repository.card;
 
-import com.maven_project.pizzas.domain.Customer;
-import com.maven_project.pizzas.service.card.AccumulativeCard;
-
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.maven_project.pizzas.domain.AccumulativeCard;
 
 /**
  * Created by Dennis
  *
  * on 4/27/2016.
  */
+@Repository("cardRepository")
+@Transactional
 public class JpaCardRepository implements CardRepository {
-    private final EntityManager manager;
+	
+	@PersistenceContext
+    private EntityManager manager;
 
-    public JpaCardRepository(EntityManager manager) {
-        this.manager = manager;
+    @Override
+    public AccumulativeCard findCard(Integer id) {
+        return manager.find(AccumulativeCard.class, id);
     }
 
     @Override
-    public void initCards() {
-
-    }
-
-    @Override
-    public AccumulativeCard findCard(Customer customer) {
-        return manager.find(AccumulativeCard.class, customer.getId());
-    }
-
-    public void saveCard(AccumulativeCard card) {
-        manager.getTransaction().begin();
+    public Integer saveCard(AccumulativeCard card) {
         manager.persist(card);
-        manager.getTransaction().commit();
+        
+		return card.getId();
     }
+
+	@Override
+	public boolean deleteCard(AccumulativeCard card) {
+		AccumulativeCard temp = manager.find(AccumulativeCard.class, card.getId());
+		
+		if (temp == null) {
+			return false;
+		}
+		
+		manager.remove(temp);
+		
+		return true;
+	}
+
+	@Override
+	public boolean updateCard(AccumulativeCard card) {
+		AccumulativeCard temp = manager.find(AccumulativeCard.class, card.getId());
+		
+		if (temp == null) {
+			return false;
+		}
+		
+		manager.merge(card);
+		
+		return true;
+	}
+
+	@Override
+	public AccumulativeCard findCardByCustomerId(Integer customerId) {
+		String query = "SELECT id FROM accumulativecard WHERE customer_id = " + customerId;
+		
+		Integer cardId = (Integer) manager.createNativeQuery(query).getResultList().get(0);
+		
+		return manager.find(AccumulativeCard.class, cardId);
+	}
 }

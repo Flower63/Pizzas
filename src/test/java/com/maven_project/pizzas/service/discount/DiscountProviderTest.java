@@ -1,7 +1,7 @@
 package com.maven_project.pizzas.service.discount;
 
 import com.maven_project.pizzas.domain.Order;
-import com.maven_project.pizzas.service.card.AccumulativeCardService;
+import com.maven_project.pizzas.service.card.SimpleCardService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,12 +14,12 @@ import static org.mockito.Mockito.*;
  * on 4/11/2016.
  */
 public class DiscountProviderTest {
-    AccumulativeCardService cardService;
+    SimpleCardService cardService;
     Order order;
 
     @Before
     public void init() {
-        cardService = mock(AccumulativeCardService.class);
+        cardService = mock(SimpleCardService.class);
         order = mock(Order.class);
     }
 

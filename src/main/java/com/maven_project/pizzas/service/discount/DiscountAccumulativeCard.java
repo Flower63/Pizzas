@@ -1,16 +1,16 @@
 package com.maven_project.pizzas.service.discount;
 
+import com.maven_project.pizzas.domain.AccumulativeCard;
 import com.maven_project.pizzas.domain.Order;
 import com.maven_project.pizzas.domain.Pizza;
-import com.maven_project.pizzas.service.card.AccumulativeCard;
-import com.maven_project.pizzas.service.card.AccumulativeCardService;
+import com.maven_project.pizzas.service.card.SimpleCardService;
 
 import java.util.Map;
 
 public class DiscountAccumulativeCard implements Discount {
-	private final AccumulativeCardService cardService;
+	private final SimpleCardService cardService;
 
-	public DiscountAccumulativeCard(AccumulativeCardService cardService) {
+	public DiscountAccumulativeCard(SimpleCardService cardService) {
 		this.cardService = cardService;
 	}
 
@@ -18,7 +18,7 @@ public class DiscountAccumulativeCard implements Discount {
 
 	@Override
 	public double countDiscount(Order order) {
-		AccumulativeCard card = cardService.findCard(order.getCustomer());
+		AccumulativeCard card = cardService.findCardByCustomer(order.getCustomer());
 		
 		if (card == null) {
 			return 0;

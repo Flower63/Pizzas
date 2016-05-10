@@ -7,24 +7,47 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Repository;
 
-import com.maven_project.pizzas.domain.Customer;
-import com.maven_project.pizzas.service.card.AccumulativeCard;
+import com.maven_project.pizzas.domain.AccumulativeCard;
 
-@Repository(value="cardRepository")
+@Repository(value="inMemCardRepository")
 public class InMemCardRepository implements CardRepository {
 	
-	private final Map<String, AccumulativeCard> storage = new HashMap<>();
-
-	@Override
-	public AccumulativeCard findCard(Customer customer) {
-		return storage.get(customer.getName());
-	}
+	private final Map<Integer, AccumulativeCard> storage = new HashMap<>();
 
 	@PostConstruct
-	@Override
 	public void initCards() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public AccumulativeCard findCard(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer saveCard(AccumulativeCard card) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean deleteCard(AccumulativeCard card) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateCard(AccumulativeCard card) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public AccumulativeCard findCardByCustomerId(Integer customerId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

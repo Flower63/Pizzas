@@ -7,7 +7,7 @@ import com.maven_project.pizzas.domain.Pizza;
 import com.maven_project.pizzas.repository.card.JpaCardRepository;
 import com.maven_project.pizzas.repository.order.JpaOrderRepository;
 import com.maven_project.pizzas.repository.pizza.JpaPizzaRepository;
-import com.maven_project.pizzas.service.card.AccumulativeCardService;
+import com.maven_project.pizzas.service.card.SimpleCardService;
 import com.maven_project.pizzas.service.discount.DiscountProvider;
 import com.maven_project.pizzas.service.discount.DiscountService;
 import com.maven_project.pizzas.service.order.OrderService;
@@ -32,11 +32,11 @@ public class JpaPizzaApp {
             emf = Persistence.createEntityManagerFactory("jpa");
             em = emf.createEntityManager();
 
-            JpaCardRepository cardRepository = new JpaCardRepository(em);
-            JpaOrderRepository orderRepository = new JpaOrderRepository(em);
-            JpaPizzaRepository pizzaRepository = new JpaPizzaRepository(em);
+            JpaCardRepository cardRepository = new JpaCardRepository();
+            JpaOrderRepository orderRepository = new JpaOrderRepository();
+            JpaPizzaRepository pizzaRepository = new JpaPizzaRepository();
 
-            OrderService orderService = new SimpleOrderService(orderRepository, pizzaRepository, new DiscountService(new DiscountProvider(new AccumulativeCardService(cardRepository))));
+            OrderService orderService = new SimpleOrderService(orderRepository, pizzaRepository, new DiscountService(new DiscountProvider(new SimpleCardService(cardRepository))));
 
             Pizza pizza = new Pizza();
             pizza.setName("Marine pizza");

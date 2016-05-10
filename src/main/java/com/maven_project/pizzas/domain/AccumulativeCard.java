@@ -1,6 +1,4 @@
-package com.maven_project.pizzas.service.card;
-
-import com.maven_project.pizzas.domain.Customer;
+package com.maven_project.pizzas.domain;
 
 import javax.persistence.*;
 
@@ -42,5 +40,10 @@ public class AccumulativeCard {
 
 	public void addToTotalAmount(double totalAmount) {
 		this.totalAmount += totalAmount;
+	}
+
+	@Override
+	public String toString() {
+		return "AccumulativeCard [id=" + id + ", totalAmount=" + totalAmount + ", customer=" + customer.getName() + "]";
 	}
 }

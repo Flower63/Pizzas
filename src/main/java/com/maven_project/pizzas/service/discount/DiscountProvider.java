@@ -10,15 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.maven_project.pizzas.domain.Order;
-import com.maven_project.pizzas.service.card.AccumulativeCardService;
+import com.maven_project.pizzas.service.card.SimpleCardService;
 
 @Service(value="discountProvider")
 public class DiscountProvider {
 	private final List<Discount> discounts = new ArrayList<>();
-	private final AccumulativeCardService cardService;
+	private final SimpleCardService cardService;
 	
 	@Autowired
-	public DiscountProvider(AccumulativeCardService cardService) {
+	public DiscountProvider(SimpleCardService cardService) {
 		this.cardService = cardService;
 	}
 

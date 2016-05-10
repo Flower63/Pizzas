@@ -3,7 +3,7 @@ package com.maven_project.pizzas.service.discount;
 import com.maven_project.pizzas.domain.Customer;
 import com.maven_project.pizzas.domain.Order;
 import com.maven_project.pizzas.domain.Pizza;
-import com.maven_project.pizzas.service.card.AccumulativeCardService;
+import com.maven_project.pizzas.service.card.SimpleCardService;
 import org.junit.Before;
 import org.junit.Test;
 
