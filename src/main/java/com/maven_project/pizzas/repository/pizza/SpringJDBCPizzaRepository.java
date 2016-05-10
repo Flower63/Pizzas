@@ -24,15 +24,25 @@ public class SpringJDBCPizzaRepository implements PizzaRepository {
     }
 
     @Override
-    public void cookPizzas() {
-
-    }
-
-    @Override
     public Pizza getPizzaByID(Integer id) {
         String sql = "SELECT * FROM pizzas WHERE id = ?";
         Pizza pizza = jdbcTemplate.queryForObject(sql, new Object[] {id}, pizzaMapper);
 
         return pizza;
+    }
+
+    @Override
+    public int savePizza(Pizza pizza) {
+        return 0;
+    }
+
+    @Override
+    public boolean deletePizza(Pizza pizza) {
+        return false;
+    }
+
+    @Override
+    public boolean updatePizza(Pizza pizza) {
+        return false;
     }
 }

@@ -38,4 +38,18 @@ public class InMemPizzaRepository implements PizzaRepository {
 		System.out.println("init method in " + this.getClass().getSimpleName());
 	}
 
+	@Override
+	public int savePizza(Pizza pizza) {
+		return 0;
+	}
+
+	@Override
+	public boolean deletePizza(Pizza pizza) {
+		return false;
+	}
+
+	@Override
+	public boolean updatePizza(Pizza pizza) {
+		return false;
+	}
 }

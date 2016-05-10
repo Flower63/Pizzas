@@ -55,11 +55,7 @@ public class Pizza {
 		this.cost = cost;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public static enum Type {
+	public enum Type {
 		SEA, VEGETERIAN, REGULAR
 	}
 
@@ -79,5 +75,15 @@ public class Pizza {
 	@Override
 	public int hashCode() {
 		return name.hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return "Pizza{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", type=" + type +
+				", cost=" + cost +
+				'}';
 	}
 }

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.maven_project.pizzas.Order;
+import org.springframework.stereotype.Repository;
 
+@Repository("orderRepository")
 public class InMemOrderRepository implements OrderRepository {
 	private List<Order> orders = new ArrayList<>();
 
