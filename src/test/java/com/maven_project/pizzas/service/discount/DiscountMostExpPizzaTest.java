@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -23,9 +24,9 @@ public class DiscountMostExpPizzaTest {
 
     private static final double DELTA = 1e-15;
 
-    Customer customer;
-    Pizza simplePizza;
-    Discount discount;
+    private Customer customer;
+    private Pizza simplePizza;
+    private Discount discount;
 
     @Before
     public void init() {
@@ -38,8 +39,11 @@ public class DiscountMostExpPizzaTest {
 
     @Test
     public void testCountDiscountFourPizzas() throws Exception {
+        Map<Pizza, Integer> pizzas = new HashMap<>();
+        pizzas.put(simplePizza, 4);
+
         //Order order = new Order(customer, Arrays.asList(simplePizza, simplePizza, simplePizza, simplePizza));
-        Order order = new Order(customer, new HashMap<>());
+        Order order = new Order(customer, pizzas);
 
         // Not more than 4 pizzas, no accumulative card
         double totalDiscount = discount.countDiscount(order);
@@ -52,8 +56,12 @@ public class DiscountMostExpPizzaTest {
         Pizza expensivePizza = mock(Pizza.class);
         when(expensivePizza.getCost()).thenReturn(100D);
 
+        Map<Pizza, Integer> pizzas = new HashMap<>();
+        pizzas.put(simplePizza, 4);
+        pizzas.put(expensivePizza, 1);
+
         //Order order = new Order(customer, Arrays.asList(simplePizza, simplePizza, simplePizza, simplePizza, expensivePizza));
-        Order order = new Order(customer, new HashMap<>());
+        Order order = new Order(customer, pizzas);
 
         // More than 4 pizzas, discount 30% for most expensive pizza, no accumulative card
         double totalDiscount = discount.countDiscount(order);

@@ -7,7 +7,7 @@ public class Pizza {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int id;
+	private Integer id;
 
 	private String name;
 
@@ -17,7 +17,7 @@ public class Pizza {
 
 	private double cost;
 	
-	public Pizza(int id, String name, Type type, Double cost) {
+	public Pizza(Integer id, String name, Type type, Double cost) {
 		this.id = id;
 		this.name = name;
 		this.type = type;
@@ -27,11 +27,11 @@ public class Pizza {
 	public Pizza() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

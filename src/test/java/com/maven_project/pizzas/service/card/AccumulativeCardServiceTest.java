@@ -16,14 +16,14 @@ import org.junit.Test;
  */
 public class AccumulativeCardServiceTest {
 	
-	CardRepository repository;
-	SimpleCardService cardService;
+	private CardRepository repository;
+	private SimpleCardService cardService;
 
 	@Before
 	public void setUp() throws Exception {
 		repository = mock(CardRepository.class);
 		cardService = new SimpleCardService(repository);
-		when(repository.findCard(anyInt())).thenReturn(new AccumulativeCard());
+		when(repository.findCardByCustomerId(anyInt())).thenReturn(new AccumulativeCard());
 	}
 
 	@Test
@@ -32,7 +32,7 @@ public class AccumulativeCardServiceTest {
     	
     	assertTrue(card != null);
     	
-    	verify(repository).findCard(anyInt());
+    	verify(repository).findCardByCustomerId(anyInt());
     }
 
 	@Test

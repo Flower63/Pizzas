@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -26,10 +27,10 @@ public class DiscountAccumulativeCardTest {
 
     private static final double DELTA = 1e-15;
 
-    SimpleCardService cardService;
-    Customer customer;
-    Pizza simplePizza;
-    DiscountAccumulativeCard discount;
+    private SimpleCardService cardService;
+    private Customer customer;
+    private Pizza simplePizza;
+    private DiscountAccumulativeCard discount;
 
     @Before
     public void init() {
@@ -43,8 +44,12 @@ public class DiscountAccumulativeCardTest {
 
     @Test
     public void testCountDiscountNoCard() throws Exception {
+
+        Map<Pizza, Integer> pizzas = new HashMap<>();
+        pizzas.put(simplePizza, 4);
+
         //Order order = new Order(customer, Arrays.asList(simplePizza, simplePizza, simplePizza, simplePizza));
-        Order order = new Order(customer, new HashMap<>());
+        Order order = new Order(customer, pizzas);
 
         // Not more than 4 pizzas, no accumulative card
         double totalDiscount = discount.countDiscount(order);
@@ -57,8 +62,12 @@ public class DiscountAccumulativeCardTest {
         Pizza expensivePizza = mock(Pizza.class);
         when(expensivePizza.getCost()).thenReturn(100D);
 
+        Map<Pizza, Integer> pizzas = new HashMap<>();
+        pizzas.put(simplePizza, 4);
+        pizzas.put(expensivePizza, 1);
+
         //Order order = new Order(customer, Arrays.asList(simplePizza, simplePizza, simplePizza, simplePizza, expensivePizza));
-        Order order = new Order(customer, new HashMap<>());
+        Order order = new Order(customer, pizzas);
 
         // More than 4 pizzas, no accumulative card
         double totalDiscount = discount.countDiscount(order);
@@ -76,7 +85,11 @@ public class DiscountAccumulativeCardTest {
         Pizza expensivePizza = mock(Pizza.class);
         when(expensivePizza.getCost()).thenReturn(100D);
 
-        Order order = new Order(customer, new HashMap<>());
+        Map<Pizza, Integer> pizzas = new HashMap<>();
+        pizzas.put(simplePizza, 4);
+        pizzas.put(expensivePizza, 1);
+
+        Order order = new Order(customer, pizzas);
 
         // More than 4 pizzas, with accumulative card
         double totalDiscount = discount.countDiscount(order);

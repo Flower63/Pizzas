@@ -151,6 +151,16 @@ public class Order {
 		this.discount = discount;
 	}
 
+	public int getPizzasCount() {
+		int res = 0;
+
+		for (Map.Entry<Pizza, Integer> entry : pizzas.entrySet()) {
+			res += entry.getValue();
+		}
+
+		return res;
+	}
+
 	public enum State {
 		NEW {
 			public State nextState() {

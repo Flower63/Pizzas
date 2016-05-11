@@ -21,30 +21,62 @@ public class JpaPizzaRepositoryTest {
 	@Test
 	public void testSavePizza() {
 		Pizza pizza = new Pizza();
-		pizza.setName("Test pizza");
+		pizza.setName("Test pizza 1");
 		pizza.setCost(100);
 		pizza.setType(Type.VEGETERIAN);
 		
 		pizzaRepository.savePizza(pizza);
-		
-		System.out.println(pizza);
-		
-		assertNotNull(pizzaRepository.getPizzaByID(pizza.getId()));
+
+		assertNotNull(pizza.getId());
 	}
 
 	@Test
 	public void testGetPizzaByID() {
-		//fail("Not yet implemented");
+		Pizza pizza = new Pizza();
+		pizza.setName("Test pizza 2");
+		pizza.setCost(100);
+		pizza.setType(Type.VEGETERIAN);
+
+		pizzaRepository.savePizza(pizza);
+
+		assertNotNull(pizzaRepository.getPizzaByID(pizza.getId()));
 	}
 
 	@Test
 	public void testDeletePizza() {
-		//fail("Not yet implemented");
+		Pizza pizza = new Pizza();
+		pizza.setName("Test pizza 3");
+		pizza.setCost(100);
+		pizza.setType(Type.VEGETERIAN);
+
+		pizzaRepository.savePizza(pizza);
+
+		assertNotNull(pizzaRepository.getPizzaByID(pizza.getId()));
+
+		assertTrue(pizzaRepository.deletePizza(pizza));
+
+		assertNull(pizzaRepository.getPizzaByID(pizza.getId()));
 	}
 
 	@Test
 	public void testUpdatePizza() {
-		//fail("Not yet implemented");
+		Pizza pizza = new Pizza();
+		pizza.setName("Test pizza 4");
+		pizza.setCost(100);
+		pizza.setType(Type.VEGETERIAN);
+
+		pizzaRepository.savePizza(pizza);
+
+		pizza.setType(Type.SEA);
+		pizza.setName("Updated pizza");
+
+		pizzaRepository.updatePizza(pizza);
+
+		Pizza newPizza = pizzaRepository.getPizzaByID(pizza.getId());
+
+		assertTrue(newPizza.getType() == Type.SEA);
+
+		assertTrue(newPizza.getName().equals("Updated pizza"));
 	}
 
 }

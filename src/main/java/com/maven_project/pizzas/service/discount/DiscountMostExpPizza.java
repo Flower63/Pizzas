@@ -7,7 +7,7 @@ public class DiscountMostExpPizza implements Discount {
 
 	@Override
 	public double countDiscount(Order order) {
-		if (order.getPizzas().size() <= 4) {
+		if (order.getPizzasCount() <= 4) {
 			return 0;
 		}
 		

@@ -18,18 +18,25 @@ import org.junit.Test;
 
 public class SimpleOrderServiceTest {
 	
-	OrderService orderService;
-	OrderRepository orderRepository;
-	PizzaRepository pizzaRepository;
-	DiscountService discountService;
-	Customer customer;
+	private OrderService orderService;
+	private OrderRepository orderRepository;
+	private PizzaRepository pizzaRepository;
+	private Customer customer;
 
 	@Before
 	public void setUp() {
 		orderRepository = mock(OrderRepository.class);
 		pizzaRepository = mock(PizzaRepository.class);
-		discountService = mock(DiscountService.class);
 		customer = mock(Customer.class);
+
+		Pizza pizza = new Pizza();
+		pizza.setName("Test pizza");
+		pizza.setType(Pizza.Type.SEA);
+		pizza.setCost(100);
+
+		when(pizzaRepository.getPizzaByID(anyInt())).thenReturn(pizza);
+
+		DiscountService discountService = mock(DiscountService.class);
 		
 		orderService = new SimpleOrderService(orderRepository, pizzaRepository, discountService){
 
@@ -49,8 +56,8 @@ public class SimpleOrderServiceTest {
 		verify(pizzaRepository).getPizzaByID(3);
 		
 		verify(orderRepository).saveOrder(any(Order.class));
-		
-		assertTrue(order.getPizzas().size() == 3);
+
+		assertEquals(order.getPizzasCount(), 3);
 	}
 
 	@Test
