@@ -9,7 +9,7 @@ import com.maven_project.pizzas.service.order.OrderService;
 
 public class SpringPizzaApp {
 	public static void main(String[] args) {
-		Customer customer = new Customer(1, "John", null);
+		Customer customer = new Customer("John", null);
 		
 		ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext(new String[] {"appContext.xml"}, false);
 

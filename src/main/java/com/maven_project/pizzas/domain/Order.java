@@ -50,6 +50,7 @@ public class Order {
 	}
 
 	public Order() {
+		this.state = State.NEW;
 	}
 
 	public Long getId() {

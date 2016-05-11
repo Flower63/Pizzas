@@ -16,9 +16,9 @@ public class InMemPizzaRepository implements PizzaRepository {
 	
 	@PostConstruct
 	public void cookPizzas() {
-		pizzasList.add(new Pizza(1, "Sea pizza 1", Type.SEA, 12.5));
-		pizzasList.add(new Pizza(2, "Regular pizza 1", Type.REGULAR, 14.0));
-		pizzasList.add(new Pizza(3, "Vegeterian pizza 1", Type.VEGETERIAN, 11.7));
+		pizzasList.add(new Pizza("Sea pizza 1", Type.SEA, 12.5));
+		pizzasList.add(new Pizza("Regular pizza 1", Type.REGULAR, 14.0));
+		pizzasList.add(new Pizza("Vegeterian pizza 1", Type.VEGETERIAN, 11.7));
 	}
 
 	@Override

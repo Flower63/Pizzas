@@ -82,7 +82,7 @@ public class SimpleOrderServiceTest {
 	public void testCountTotalCost() {
 		double delta = 1e-15;
 
-		when(pizzaRepository.getPizzaByID(1)).thenReturn(new Pizza(1, "Fake pizza", Pizza.Type.REGULAR, 10D));
+		when(pizzaRepository.getPizzaByID(1)).thenReturn(new Pizza("Fake pizza", Pizza.Type.REGULAR, 10D));
 
 		Order order = orderService.placeNewOrder(customer, 1, 1, 1);
 

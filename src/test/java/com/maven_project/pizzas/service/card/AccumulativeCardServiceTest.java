@@ -28,7 +28,7 @@ public class AccumulativeCardServiceTest {
 
 	@Test
     public void testFindCard() throws Exception {
-    	AccumulativeCard card = cardService.findCardByCustomer(new Customer(0, null, null));
+    	AccumulativeCard card = cardService.findCardByCustomer(new Customer());
     	
     	assertTrue(card != null);
     	

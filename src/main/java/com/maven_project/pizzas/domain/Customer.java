@@ -18,8 +18,7 @@ public class Customer {
 	public Customer() {
 	}
 
-	public Customer(int id, String name, List<Address> addresses) {
-		this.id = id;
+	public Customer(String name, List<Address> addresses) {
 		this.name = name;
 		this.addresses = addresses;
 	}
