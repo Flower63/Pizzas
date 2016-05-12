@@ -13,7 +13,7 @@ import com.maven_project.pizzas.domain.Address;
 public class JpaAddressRepository implements AddressRepository {
 	
 	@PersistenceContext
-	EntityManager manager;
+	private EntityManager manager;
 
 	@Override
 	public Address findAddress(Integer id) {

@@ -2,6 +2,7 @@ package com.maven_project.pizzas.repository.pizza;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +18,19 @@ public class JpaPizzaRepositoryTest {
 
 	@Autowired
 	private PizzaRepository pizzaRepository;
+
+	private Pizza pizza;
+
+	@Before
+	public void addPizza() {
+		pizza = new Pizza();
+		pizza.setName("Test pizza");
+		pizza.setCost(100);
+		pizza.setType(Type.VEGETERIAN);
+	}
 	
 	@Test
 	public void testSavePizza() {
-		Pizza pizza = new Pizza();
-		pizza.setName("Test pizza 1");
-		pizza.setCost(100);
-		pizza.setType(Type.VEGETERIAN);
-		
 		pizzaRepository.savePizza(pizza);
 
 		assertNotNull(pizza.getId());
@@ -32,11 +38,6 @@ public class JpaPizzaRepositoryTest {
 
 	@Test
 	public void testGetPizzaByID() {
-		Pizza pizza = new Pizza();
-		pizza.setName("Test pizza 2");
-		pizza.setCost(100);
-		pizza.setType(Type.VEGETERIAN);
-
 		pizzaRepository.savePizza(pizza);
 
 		assertNotNull(pizzaRepository.getPizzaByID(pizza.getId()));
@@ -44,11 +45,6 @@ public class JpaPizzaRepositoryTest {
 
 	@Test
 	public void testDeletePizza() {
-		Pizza pizza = new Pizza();
-		pizza.setName("Test pizza 3");
-		pizza.setCost(100);
-		pizza.setType(Type.VEGETERIAN);
-
 		pizzaRepository.savePizza(pizza);
 
 		assertNotNull(pizzaRepository.getPizzaByID(pizza.getId()));
@@ -60,11 +56,6 @@ public class JpaPizzaRepositoryTest {
 
 	@Test
 	public void testUpdatePizza() {
-		Pizza pizza = new Pizza();
-		pizza.setName("Test pizza 4");
-		pizza.setCost(100);
-		pizza.setType(Type.VEGETERIAN);
-
 		pizzaRepository.savePizza(pizza);
 
 		pizza.setType(Type.SEA);

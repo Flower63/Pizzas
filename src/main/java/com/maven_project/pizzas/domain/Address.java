@@ -10,16 +10,16 @@ public class Address {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int id;
+	private Integer id;
 
 	private String city;
 	private String street;
-	private String appartment;
+	private String apartment;
 	
 	public Address(String city, String street, String appartment) {
 		this.city = city;
 		this.street = street;
-		this.appartment = appartment;
+		this.apartment = appartment;
 	}
 
 	public Address() {}
@@ -32,15 +32,15 @@ public class Address {
 		return street;
 	}
 
-	public String getAppartment() {
-		return appartment;
+	public String getApartment() {
+		return apartment;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -52,7 +52,7 @@ public class Address {
 		this.street = street;
 	}
 
-	public void setAppartment(String appartment) {
-		this.appartment = appartment;
+	public void setApartment(String apartment) {
+		this.apartment = apartment;
 	}
 }

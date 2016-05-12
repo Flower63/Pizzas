@@ -8,7 +8,7 @@ public class Customer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int id;
+	private Integer id;
 
 	private String name;
 
@@ -23,11 +23,11 @@ public class Customer {
 		this.addresses = addresses;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	

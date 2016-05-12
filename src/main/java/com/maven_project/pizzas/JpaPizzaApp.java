@@ -48,7 +48,7 @@ public class JpaPizzaApp {
             Address address = new Address();
             address.setCity("Kiev");
             address.setStreet("Khrechatic 4");
-            address.setAppartment("11");
+            address.setApartment("11");
 
             em.getTransaction().begin();
             em.persist(address);

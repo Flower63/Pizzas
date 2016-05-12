@@ -91,7 +91,13 @@ public class JpaOrderRepositoryTest {
 
 	@Test
 	public void testDeleteOrder() {
-		
+		orderRepository.saveOrder(order);
+
+		assertNotNull(orderRepository.findOrder(order.getId()));
+
+		orderRepository.deleteOrder(order);
+
+		assertNull(orderRepository.findOrder(order.getId()));
 	}
 
 }

@@ -13,7 +13,7 @@ import com.maven_project.pizzas.domain.Customer;
 public class JpaCustomerRepository implements CustomerRepository {
 	
 	@PersistenceContext
-	EntityManager manager;
+	private EntityManager manager;
 
 	@Override
 	public Customer findCustomer(Integer id) {
