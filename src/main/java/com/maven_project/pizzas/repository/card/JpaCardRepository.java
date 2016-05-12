@@ -1,5 +1,7 @@
 package com.maven_project.pizzas.repository.card;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -62,8 +64,14 @@ public class JpaCardRepository implements CardRepository {
 	public AccumulativeCard findCardByCustomerId(Integer customerId) {
 		String query = "SELECT id FROM accumulativecard WHERE customer_id = " + customerId;
 		
-		Integer cardId = (Integer) manager.createNativeQuery(query).getResultList().get(0);
+		AccumulativeCard result = null;
 		
-		return manager.find(AccumulativeCard.class, cardId);
+		List results = manager.createNativeQuery(query).getResultList();
+		
+		if (results.size() > 0) {
+			result = manager.find(AccumulativeCard.class, results.get(0));
+		}
+		
+		return result;
 	}
 }
