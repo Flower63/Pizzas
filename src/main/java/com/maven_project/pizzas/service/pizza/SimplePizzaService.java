@@ -13,10 +13,14 @@ import org.springframework.stereotype.Service;
 @Service("pizzaService")
 public class SimplePizzaService implements PizzaService {
 
-    @Autowired
     private PizzaRepository pizzaRepository;
 
-    @Override
+    @Autowired
+    public SimplePizzaService(PizzaRepository pizzaRepository) {
+		this.pizzaRepository = pizzaRepository;
+	}
+
+	@Override
     public Pizza getPizzaByID(Integer id) {
         return pizzaRepository.getPizzaByID(id);
     }

@@ -11,8 +11,8 @@ import com.maven_project.pizzas.domain.Customer;
 import com.maven_project.pizzas.domain.Order;
 import com.maven_project.pizzas.domain.Pizza;
 import com.maven_project.pizzas.repository.order.OrderRepository;
-import com.maven_project.pizzas.repository.pizza.PizzaRepository;
 import com.maven_project.pizzas.service.discount.DiscountService;
+import com.maven_project.pizzas.service.pizza.PizzaService;
 
 @Service(value="orderService")
 public class SimpleOrderService implements OrderService {
@@ -20,14 +20,14 @@ public class SimpleOrderService implements OrderService {
 	private static final int MAX_PIZZAS_NUMBER = 10;
 	
 	private OrderRepository orderRepository;
-	private PizzaRepository pizzaRepository;
+	private PizzaService pizzaService;
 	private DiscountService discountService;
 	
 	@Autowired
-	public SimpleOrderService(OrderRepository orderRepository, PizzaRepository pizzaRepository,
+	public SimpleOrderService(OrderRepository orderRepository, PizzaService pizzaService,
 			DiscountService discountService) {
 		this.orderRepository = orderRepository;
-		this.pizzaRepository = pizzaRepository;
+		this.pizzaService = pizzaService;
 		this.discountService = discountService;
 	}
 
@@ -53,7 +53,7 @@ public class SimpleOrderService implements OrderService {
 		Map<Pizza, Integer> pizzas = new HashMap<>();
 
         for(Integer id : pizzasID) {
-			Pizza pizza = pizzaRepository.getPizzaByID(id);
+			Pizza pizza = pizzaService.getPizzaByID(id);
 			if (pizza == null) {
 				continue;
 			}
@@ -123,8 +123,8 @@ public class SimpleOrderService implements OrderService {
 		this.orderRepository = orderRepository;
 	}
 
-	public void setPizzaRepository(PizzaRepository pizzaRepository) {
-		this.pizzaRepository = pizzaRepository;
+	public void setPizzaService(PizzaService pizzaService) {
+		this.pizzaService = pizzaService;
 	}
 
 	public void setDiscountService(DiscountService discountService) {

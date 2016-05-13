@@ -12,6 +12,8 @@ import com.maven_project.pizzas.service.discount.DiscountProvider;
 import com.maven_project.pizzas.service.discount.DiscountService;
 import com.maven_project.pizzas.service.order.OrderService;
 import com.maven_project.pizzas.service.order.SimpleOrderService;
+import com.maven_project.pizzas.service.pizza.PizzaService;
+import com.maven_project.pizzas.service.pizza.SimplePizzaService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -35,8 +37,9 @@ public class JpaPizzaApp {
             JpaCardRepository cardRepository = new JpaCardRepository();
             JpaOrderRepository orderRepository = new JpaOrderRepository();
             JpaPizzaRepository pizzaRepository = new JpaPizzaRepository();
+            PizzaService pizzaService = new SimplePizzaService(pizzaRepository);
 
-            OrderService orderService = new SimpleOrderService(orderRepository, pizzaRepository, new DiscountService(new DiscountProvider(new SimpleCardService(cardRepository))));
+            OrderService orderService = new SimpleOrderService(orderRepository, pizzaService, new DiscountService(new DiscountProvider(new SimpleCardService(cardRepository))));
 
             Pizza pizza = new Pizza();
             pizza.setName("Marine pizza");
