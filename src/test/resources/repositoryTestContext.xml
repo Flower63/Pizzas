@@ -20,17 +20,20 @@
 				<bean class="com.maven_project.pizzas.Pizza">
 					<constructor-arg index="0"><value>1</value></constructor-arg>	
 					<constructor-arg index="1"><value>Pizza 1</value></constructor-arg>
-					<constructor-arg index="2"><value>REGULAR</value></constructor-arg>			
+					<constructor-arg index="2"><value>REGULAR</value></constructor-arg>
+					<constructor-arg index="3"><value>100.5</value></constructor-arg>			
 				</bean>
 				<bean class="com.maven_project.pizzas.Pizza">
 					<constructor-arg index="0"><value>2</value></constructor-arg>	
 					<constructor-arg index="1"><value>Pizza 2</value></constructor-arg>
-					<constructor-arg index="2"><value>REGULAR</value></constructor-arg>			
+					<constructor-arg index="2"><value>REGULAR</value></constructor-arg>
+					<constructor-arg index="3"><value>100.5</value></constructor-arg>			
 				</bean>
 				<bean class="com.maven_project.pizzas.Pizza">
 					<constructor-arg index="0"><value>3</value></constructor-arg>	
 					<constructor-arg index="1"><value>Pizza 3</value></constructor-arg>
-					<constructor-arg index="2"><value>REGULAR</value></constructor-arg>			
+					<constructor-arg index="2"><value>REGULAR</value></constructor-arg>
+					<constructor-arg index="3"><value>100.5</value></constructor-arg>			
 				</bean>
 			</list>
 		</property>

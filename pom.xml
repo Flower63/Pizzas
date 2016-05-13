@@ -5,7 +5,7 @@
   <groupId>com.maven_project</groupId>
   <artifactId>pizzas</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
 
   <name>Pizzas</name>
   <url>http://maven.apache.org</url>
@@ -78,5 +78,31 @@
     	<artifactId>hibernate-entitymanager</artifactId>
     	<version>5.1.0.Final</version>
     </dependency>
+    
+    <dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>3.1.0</version>
+		<scope>provided</scope>
+	</dependency>
+	
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>jstl</artifactId>
+		<version>1.2</version>
+	</dependency>
   </dependencies>
+  
+  <build>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.tomcat.maven</groupId>
+			<artifactId>tomcat7-maven-plugin</artifactId>
+			<version>2.2</version>
+			<!-- <configuration> -->
+			<!-- <port>8081</port> -->
+			<!-- </configuration> -->
+		</plugin>
+	</plugins>
+  </build>
 </project>
