@@ -22,7 +22,7 @@ public class PizzaControllerAdvice {
 	public Pizza findPizza(@RequestParam(value = "pizzaId", required = false) Integer pizzaId) {
 		
 		if (pizzaId == null) {
-			return null;
+			return new Pizza();
 		}
 		
 		Pizza pizza = pizzaRepository.getPizzaByID(pizzaId);

@@ -13,6 +13,7 @@ public class ExceptionControllerAdvice {
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public String error(Exception e, Model model) {
 		model.addAttribute("ex", e);
+		e.printStackTrace();
 		return "error";
 	}
 }

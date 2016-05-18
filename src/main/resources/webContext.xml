@@ -17,14 +17,13 @@
     <context:component-scan base-package="com.maven_project.pizzas.web" />
     
     <mvc:annotation-driven conversion-service="conversionService"/>
+    
     <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean" >
     	<property name="converters">
     		<set>
     			<bean class="com.maven_project.pizzas.web.infrastructure.PizzaConverter" />
     		</set>
     	</property>
-    	<!-- 	class="com.maven_project.pizzas.web.infrastructure.PizzaConverter"> -->
-    	
     </bean>
     
     <!-- <mvc:view-resolvers>

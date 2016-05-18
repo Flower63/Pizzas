@@ -4,8 +4,11 @@ import com.maven_project.pizzas.Pizza;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  * Created by Dennis
@@ -26,6 +29,12 @@ public class JpaPizzaRepository implements PizzaRepository {
 
     @Override
     public int savePizza(Pizza pizza) {
+    	if (pizza.getId() != null) {
+    		updatePizza(pizza);
+    		
+    		return pizza.getId();
+    	}
+    	
         em.persist(pizza);
 
         return pizza.getId();
@@ -46,6 +55,23 @@ public class JpaPizzaRepository implements PizzaRepository {
 
     @Override
     public boolean updatePizza(Pizza pizza) {
-        return false;
+    	Pizza temp = em.find(Pizza.class, pizza.getId());
+
+        if (temp == null) {
+            return false;
+        }
+
+        em.merge(pizza);
+
+        return true;
     }
+
+	@Override
+	public List<Pizza> getAllPizzas() {
+		Query query = em.createQuery("SELECT e FROM Pizza e");
+		
+		List<Pizza> result = query.getResultList();
+		
+		return result;
+	}
 }

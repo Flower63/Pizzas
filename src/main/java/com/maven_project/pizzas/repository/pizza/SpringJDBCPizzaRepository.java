@@ -4,6 +4,8 @@ import com.maven_project.pizzas.Pizza;
 import com.maven_project.pizzas.ifrastructure.jdbc.PizzaMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 /**
@@ -45,4 +47,10 @@ public class SpringJDBCPizzaRepository implements PizzaRepository {
     public boolean updatePizza(Pizza pizza) {
         return false;
     }
+
+	@Override
+	public List<Pizza> getAllPizzas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

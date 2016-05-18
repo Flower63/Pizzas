@@ -52,4 +52,9 @@ public class InMemPizzaRepository implements PizzaRepository {
 	public boolean updatePizza(Pizza pizza) {
 		return false;
 	}
+
+	@Override
+	public List<Pizza> getAllPizzas() {
+		return pizzasList;
+	}
 }
