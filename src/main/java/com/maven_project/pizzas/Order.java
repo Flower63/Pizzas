@@ -6,6 +6,9 @@ import java.util.Map;
 
 import javax.persistence.*;
 
+import com.maven_project.pizzas.domain.Customer;
+import com.maven_project.pizzas.domain.Pizza;
+
 @Entity(name="orders")
 public class Order {
 	@Id

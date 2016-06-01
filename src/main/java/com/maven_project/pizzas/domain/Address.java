@@ -1,8 +1,11 @@
-package com.maven_project.pizzas;
+package com.maven_project.pizzas.domain;
 
 import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
+
+import com.maven_project.pizzas.State;
+import com.maven_project.pizzas.StateConverter;
 
 @Entity
 public class Address {

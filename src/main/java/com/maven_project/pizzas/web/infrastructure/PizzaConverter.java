@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import com.maven_project.pizzas.Pizza;
+import com.maven_project.pizzas.domain.Pizza;
 import com.maven_project.pizzas.repository.pizza.PizzaRepository;
 
 @Component
@@ -20,6 +20,6 @@ public class PizzaConverter implements Converter<String, Pizza> {
 			return null;
 		}
 		
-		return pizzaRepository.getPizzaByID(Integer.valueOf(pizzaId));
+		return pizzaRepository.findOne(Integer.valueOf(pizzaId));
 	}
 }

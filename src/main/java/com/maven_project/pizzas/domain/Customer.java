@@ -1,4 +1,4 @@
-package com.maven_project.pizzas;
+package com.maven_project.pizzas.domain;
 
 import java.util.List;
 

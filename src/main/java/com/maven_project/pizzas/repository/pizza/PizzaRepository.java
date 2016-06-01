@@ -1,18 +1,9 @@
 package com.maven_project.pizzas.repository.pizza;
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import com.maven_project.pizzas.Pizza;
+import com.maven_project.pizzas.domain.Pizza;
 
-public interface PizzaRepository {
-	
-	List<Pizza> getAllPizzas();
-
-	Pizza getPizzaByID(Integer id);
-
-	int savePizza(Pizza pizza);
-
-	boolean deletePizza(Pizza pizza);
-
-	boolean updatePizza(Pizza pizza);
-}
+@Repository
+public interface PizzaRepository extends CrudRepository<Pizza, Integer> {}

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.maven_project.pizzas.Pizza;
+import com.maven_project.pizzas.domain.Pizza;
 import com.maven_project.pizzas.repository.pizza.PizzaRepository;
 
 @ControllerAdvice
@@ -25,7 +25,7 @@ public class PizzaControllerAdvice {
 			return new Pizza();
 		}
 		
-		Pizza pizza = pizzaRepository.getPizzaByID(pizzaId);
+		Pizza pizza = pizzaRepository.findOne(pizzaId);
 		System.out.println(pizza);
 		return pizza;
 	}
@@ -42,7 +42,7 @@ public class PizzaControllerAdvice {
 				if((pizzaId == null) || pizzaId.isEmpty()) {
 					pizza = new Pizza();
 				} else {
-					pizza = pizzaRepository.getPizzaByID(Integer.valueOf(pizzaId));
+					pizza = pizzaRepository.findOne(Integer.valueOf(pizzaId));
 				}
 				
 				setValue(pizza);

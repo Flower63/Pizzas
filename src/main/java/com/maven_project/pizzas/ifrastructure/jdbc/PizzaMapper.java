@@ -1,7 +1,8 @@
 package com.maven_project.pizzas.ifrastructure.jdbc;
 
-import com.maven_project.pizzas.Pizza;
 import org.springframework.jdbc.core.RowMapper;
+
+import com.maven_project.pizzas.domain.Pizza;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

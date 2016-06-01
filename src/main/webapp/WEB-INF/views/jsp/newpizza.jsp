@@ -7,8 +7,8 @@
 <title>Edit pizza</title>
 </head>
 <body>
-	<form action="/pizzas/addNew" method="post">
-		<input type="hidden" name="pizzaId" value="${pizza.id}">
+	<form action="/pizzas/app/addNew" method="post">
+		<input type="hidden" name="pizzaId" value="${pizza.pizzaId}">
 		<input type="text" name="name" value="${pizza.name}">
 		<input type="text" name="type" value="${pizza.type}">
 		<input type="number" name="cost" step="any" value="${pizza.cost}">

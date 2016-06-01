@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.maven_project.pizzas.domain.Customer;
+
 @ContextConfiguration(locations = {"classpath:/appContext.xml"}
 , inheritInitializers = true)
 public class SimpleOrderServiceTest extends RepositoryTestConfig {

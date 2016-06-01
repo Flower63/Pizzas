@@ -1,5 +1,6 @@
 package com.maven_project.pizzas;
 
+import com.maven_project.pizzas.domain.Pizza;
 import com.maven_project.pizzas.repository.pizza.PizzaRepository;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -20,7 +21,7 @@ public class JpaWithSpring {
 
         PizzaRepository pizzaRepository = (PizzaRepository) appContext.getBean("pizzaRepository");
 
-        Pizza p = pizzaRepository.getPizzaByID(58);
+        Pizza p = pizzaRepository.findOne(58);
 
         System.out.println(p);
 
@@ -29,10 +30,10 @@ public class JpaWithSpring {
         newPizza.setCost(15.5);
         newPizza.setType(Pizza.Type.VEGETERIAN);
 
-        int id = pizzaRepository.savePizza(newPizza);
+        //int id = pizzaRepository.save(newPizza);
 
-        System.out.println(id);
+        //System.out.println(id);
 
-        pizzaRepository.deletePizza(newPizza);
+        //pizzaRepository.deletePizza(newPizza);
     }
 }

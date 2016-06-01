@@ -8,6 +8,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.maven_project.pizzas.domain.Customer;
+
 @Entity
 //@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class RegistratedCustomer extends Customer {

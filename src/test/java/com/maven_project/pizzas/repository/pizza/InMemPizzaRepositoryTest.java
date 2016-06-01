@@ -1,6 +1,5 @@
 package com.maven_project.pizzas.repository.pizza;
 
-import com.maven_project.pizzas.Pizza;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,8 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.maven_project.pizzas.domain.Pizza;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,7 +38,7 @@ public class InMemPizzaRepositoryTest extends AbstractTransactionalJUnit4SpringC
         pizza.setType(Pizza.Type.REGULAR);
         pizza.setCost(200.5);
 
-        assertNotNull(pizzaRepository.savePizza(pizza));
+        assertNotNull(pizzaRepository.save(pizza));
 
         System.out.println(pizza);
     }
@@ -49,9 +50,9 @@ public class InMemPizzaRepositoryTest extends AbstractTransactionalJUnit4SpringC
         pizza.setType(Pizza.Type.REGULAR);
         pizza.setCost(200.5);
 
-        assertNotNull(pizzaRepository.savePizza(pizza));
+        assertNotNull(pizzaRepository.save(pizza));
 
-        Pizza pizza2 = pizzaRepository.getPizzaByID(pizza.getId());
+        Pizza pizza2 = pizzaRepository.findOne(pizza.getPizzaId());
         System.out.println(pizza2);
     }
 

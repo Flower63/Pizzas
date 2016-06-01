@@ -3,6 +3,8 @@ package com.maven_project.pizzas;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.maven_project.pizzas.domain.Customer;
+import com.maven_project.pizzas.domain.Pizza;
 import com.maven_project.pizzas.ifrastructure.Benchmark;
 import com.maven_project.pizzas.repository.order.OrderRepository;
 import com.maven_project.pizzas.repository.pizza.PizzaRepository;
@@ -28,14 +30,14 @@ public class SimpleOrderService implements OrderService
         List<Pizza> pizzas = new ArrayList<>();
 
         for(Integer id : pizzasID) {
-        	pizzas.add(pizzaRepository.getPizzaByID(id));  // get Pizza from predifined in-memory list
+        	pizzas.add(pizzaRepository.findOne(id));  // get Pizza from predifined in-memory list
         }
 
         Order newOrder = createOrder();
         newOrder.setCustomer(customer);
         newOrder.setPizzas(pizzas);
 
-        orderRepository.saveOrder(newOrder);  // set Order Id and save Order to in-memory list
+        //orderRepository.saveOrder(newOrder);  // set Order Id and save Order to in-memory list
 
         return newOrder;
 

@@ -8,6 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import com.maven_project.pizzas.domain.Address;
+import com.maven_project.pizzas.domain.Customer;
+import com.maven_project.pizzas.domain.Pizza;
+
 public class JpaWithoutSpring {
 
 	public static void main(String[] args) {

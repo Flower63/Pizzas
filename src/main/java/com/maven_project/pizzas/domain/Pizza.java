@@ -1,4 +1,4 @@
-package com.maven_project.pizzas;
+package com.maven_project.pizzas.domain;
 
 import javax.persistence.*;
 
@@ -6,7 +6,8 @@ import javax.persistence.*;
 public class Pizza {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+	@Column(name = "id")
+	private Integer pizzaId;
 	private String name;
 	@Column(name="pizza_type")
 	@Enumerated(EnumType.ORDINAL)
@@ -14,7 +15,7 @@ public class Pizza {
 	private double cost;
 	
 	public Pizza(Integer id, String name, Type type, double cost) {
-		this.id = id;
+		this.pizzaId = id;
 		this.name = name;
 		this.type = type;
 		this.cost = cost;
@@ -23,12 +24,12 @@ public class Pizza {
 	public Pizza() {
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getPizzaId() {
+		return pizzaId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setPizzaId(int id) {
+		this.pizzaId = id;
 	}
 
 	public String getName() {
@@ -67,7 +68,7 @@ public class Pizza {
 		Pizza pizza = (Pizza) o;
 
 		if (Double.compare(pizza.getCost(), getCost()) != 0) return false;
-		if (!getId().equals(pizza.getId())) return false;
+		if (!getPizzaId().equals(pizza.getPizzaId())) return false;
 		if (!getName().equals(pizza.getName())) return false;
 		return getType() == pizza.getType();
 	}
@@ -80,7 +81,7 @@ public class Pizza {
 	@Override
 	public String toString() {
 		return "Pizza{" +
-				"id=" + id +
+				"id=" + pizzaId +
 				", name='" + name + '\'' +
 				", type=" + type +
 				", cost=" + cost +

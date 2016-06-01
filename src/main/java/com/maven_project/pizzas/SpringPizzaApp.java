@@ -5,6 +5,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.maven_project.pizzas.domain.Customer;
 import com.maven_project.pizzas.repository.pizza.PizzaRepository;
 
 public class SpringPizzaApp {
@@ -28,7 +29,7 @@ public class SpringPizzaApp {
 		
 		PizzaRepository pr = (PizzaRepository) appContext.getBean("pizzaRepository");
 		
-		System.out.println(pr.getPizzaByID(1));
+		System.out.println(pr.findOne(1));
 
         OrderService orderService = (OrderService) appContext.getBean("orderService");
         //((SimpleOrderService) orderService).setAppContext(appContext);

@@ -8,10 +8,10 @@
 </head>
 <body>
 <h1>Hello from index!</h1>
-<form action="/pizzas/pizzas" method="get">
+<form action="/pizzas/app/pizzas" method="get">
 	<button type="submit">Show pizzas</button>
 </form>
-<form action="/pizzas/edit" method="get">
+<form action="/pizzas/app/edit" method="get">
 	<button type="submit">Add new pizza</button>
 </form>
 </body>
