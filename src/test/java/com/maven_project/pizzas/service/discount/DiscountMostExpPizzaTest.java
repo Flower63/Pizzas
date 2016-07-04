@@ -32,7 +32,7 @@ public class DiscountMostExpPizzaTest {
         simplePizza = mock(Pizza.class);
         discount = new DiscountMostExpPizza();
 
-        when(simplePizza.getCost()).thenReturn(10D);
+        when(simplePizza.getPrice()).thenReturn(10D);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class DiscountMostExpPizzaTest {
         Map<Pizza, Integer> pizzas = new HashMap<>();
         pizzas.put(simplePizza, 4);
 
-        Order order = new Order(customer, pizzas);
+        Order order = new Order(customer, pizzas, null);
 
         // Not more than 4 pizzas, no accumulative card
         double totalDiscount = discount.countDiscount(order);
@@ -51,13 +51,13 @@ public class DiscountMostExpPizzaTest {
     @Test
     public void testCountDiscountFivePizzas() throws Exception {
         Pizza expensivePizza = mock(Pizza.class);
-        when(expensivePizza.getCost()).thenReturn(100D);
+        when(expensivePizza.getPrice()).thenReturn(100D);
 
         Map<Pizza, Integer> pizzas = new HashMap<>();
         pizzas.put(simplePizza, 4);
         pizzas.put(expensivePizza, 1);
 
-        Order order = new Order(customer, pizzas);
+        Order order = new Order(customer, pizzas, null);
 
         // More than 4 pizzas, discount 30% for most expensive pizza, no accumulative card
         double totalDiscount = discount.countDiscount(order);

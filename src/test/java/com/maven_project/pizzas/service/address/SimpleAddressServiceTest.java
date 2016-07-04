@@ -6,7 +6,9 @@ import org.junit.Test;
 import static org.mockito.Mockito.*;
 
 import com.maven_project.pizzas.domain.Address;
-import com.maven_project.pizzas.repository.address.AddressRepository;
+import com.maven_project.pizzas.repository.AddressRepository;
+import com.maven_project.pizzas.service.AddressService;
+import com.maven_project.pizzas.service.impl.SimpleAddressService;
 
 public class SimpleAddressServiceTest {
 	
@@ -24,7 +26,7 @@ public class SimpleAddressServiceTest {
 	public void testFindAddress() {
 		addressService.findAddress(5);
 		
-		verify(addressRepository).findAddress(5);
+		verify(addressRepository).findOne(5);
 	}
 
 	@Test
@@ -33,16 +35,16 @@ public class SimpleAddressServiceTest {
 		
 		addressService.saveAddress(address);
 		
-		verify(addressRepository).saveAddress(address);
+		verify(addressRepository).save(address);
 	}
 
 	@Test
 	public void testUpdateAddress() {
 		Address address = new Address();
 		
-		addressService.updateAddress(address);
+		addressService.saveAddress(address);
 		
-		verify(addressRepository).updateAddress(address);
+		verify(addressRepository).save(address);
 	}
 
 	@Test
@@ -51,7 +53,7 @@ public class SimpleAddressServiceTest {
 		
 		addressService.deleteAddress(address);
 		
-		verify(addressRepository).deleteAddress(address);
+		verify(addressRepository).delete(address);
 	}
 
 }

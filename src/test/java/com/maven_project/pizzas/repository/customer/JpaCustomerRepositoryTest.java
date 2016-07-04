@@ -2,7 +2,9 @@ package com.maven_project.pizzas.repository.customer;
 
 import com.maven_project.pizzas.domain.Address;
 import com.maven_project.pizzas.domain.Customer;
-import com.maven_project.pizzas.repository.address.AddressRepository;
+import com.maven_project.pizzas.repository.AddressRepository;
+import com.maven_project.pizzas.repository.CustomerRepository;
+
 import org.hibernate.annotations.Table;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,56 +38,56 @@ public class JpaCustomerRepositoryTest {
     public void makeCustomer() {
         Address address = new Address("City", "Street", "Apprtmnt");
 
-        addressRepository.saveAddress(address);
+        addressRepository.save(address);
 
         customer = new Customer("Sergey", Arrays.asList(address));
     }
 
     @Test
     public void findCustomer() throws Exception {
-        customerRepository.saveCustomer(customer);
+        customerRepository.save(customer);
 
-        assertNotNull(customerRepository.findCustomer(customer.getId()));
+        assertNotNull(customerRepository.findOne(customer.getId()));
     }
 
     @Test
     public void saveCustomer() throws Exception {
         assertNull(customer.getId());
 
-        customerRepository.saveCustomer(customer);
+        customerRepository.save(customer);
 
         assertNotNull(customer.getId());
     }
 
     @Test
     public void updateCustomer() throws Exception {
-        customerRepository.saveCustomer(customer);
+        customerRepository.save(customer);
 
         customer.setName("Andrey");
 
-        customerRepository.updateCustomer(customer);
+        customerRepository.save(customer);
 
-        Customer temp = customerRepository.findCustomer(customer.getId());
+        Customer temp = customerRepository.findOne(customer.getId());
 
         assertEquals("Andrey", temp.getName());
     }
 
     @Test
     public void deleteCustomer() throws Exception {
-        customerRepository.saveCustomer(customer);
+        customerRepository.save(customer);
 
-        assertNotNull(customerRepository.findCustomer(customer.getId()));
+        assertNotNull(customerRepository.findOne(customer.getId()));
 
-        customerRepository.deleteCustomer(customer);
+        customerRepository.delete(customer);
 
-        assertNull(customerRepository.findCustomer(customer.getId()));
+        assertNull(customerRepository.findOne(customer.getId()));
     }
 
     @Test
     public void getCustomerAddress() {
-        customerRepository.saveCustomer(customer);
+        customerRepository.save(customer);
 
-        Customer temp = customerRepository.findCustomer(customer.getId());
+        Customer temp = customerRepository.findOne(customer.getId());
 
         assertEquals(1, temp.getAddresses().size());
 

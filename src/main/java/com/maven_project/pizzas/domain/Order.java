@@ -7,12 +7,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-import com.maven_project.pizzas.*;
-
 import javax.persistence.*;
 
-//@Component(value = "order")
-@Domain
+@Component(value = "order")
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Entity(name = "ORDERS")
 public class Order {
@@ -36,21 +33,24 @@ public class Order {
 	@ManyToOne
 	private Address address;
 
-	private boolean isDiscountsApplicable;
+	private Boolean isDiscountsApplicable;
 
-	private double price;
-	private double discount;
+	private Double price;
+
+	private Double discount;
 
 	@Autowired
-	public Order(Customer customer, Map<Pizza, Integer> pizzas) {
+	public Order(Customer customer, Map<Pizza, Integer> pizzas, Address address) {
 		this.customer = customer;
 		this.pizzas = pizzas;
 		this.state = State.NEW;
 		this.isDiscountsApplicable = true;
+		this.address = address;
 	}
 
 	public Order() {
 		this.state = State.NEW;
+		this.isDiscountsApplicable = false;
 	}
 
 	public Long getId() {
@@ -64,25 +64,16 @@ public class Order {
 	public Map<Pizza, Integer> getPizzas() {
 		return pizzas;
 	}
-	
-	public boolean changeOrder(Map<Pizza, Integer> pizzas) {
-		if (this.state == State.NEW) {
-			this.pizzas = pizzas;
-			return true;
-		}
-		
-		return false;
-	}
 
 	public State getState() {
 		return state;
 	}
-	
+
 	public State proceedOrder() {
 		this.state = state.nextState();
 		return state;
 	}
-	
+
 	public State cancelOrder() {
 		this.state = state.cancel();
 		return state;
@@ -96,19 +87,19 @@ public class Order {
 		result.append(" For ");
 		result.append(customer.getName());
 		result.append(" { ");
-		
+
 		for (Map.Entry<Pizza, Integer> entry : pizzas.entrySet()) {
 			result.append(entry.getKey().toString());
 			result.append(" ");
 			result.append(entry.getValue());
 		}
-		
+
 		result.append(" } ");
-		
+
 		return result.toString();
 	}
 
-	public boolean isDiscountsApplicable() {
+	public Boolean isDiscountsApplicable() {
 		return isDiscountsApplicable;
 	}
 
@@ -136,19 +127,19 @@ public class Order {
 		this.address = address;
 	}
 
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	public double getDiscount() {
+	public Double getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(double discount) {
+	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
 
@@ -164,32 +155,38 @@ public class Order {
 
 	public enum State {
 		NEW {
+
 			public State nextState() {
 				return IN_PROGRESS;
 			}
-		}, 
+		},
 		IN_PROGRESS {
+
 			public State nextState() {
 				return DONE;
 			}
-		}, DONE {
+		},
+		DONE {
+
 			public State nextState() {
 				return DONE;
 			}
-			
+
 			public State cancel() {
 				return DONE;
 			}
-		}, CANCELED {
+		},
+		CANCELED {
+
 			public State nextState() {
 				return CANCELED;
 			}
 		};
-		
+
 		public State nextState() {
 			return null;
 		}
-		
+
 		public State cancel() {
 			return CANCELED;
 		}

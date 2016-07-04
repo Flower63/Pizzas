@@ -4,7 +4,8 @@ import com.maven_project.pizzas.domain.AccumulativeCard;
 import com.maven_project.pizzas.domain.Customer;
 import com.maven_project.pizzas.domain.Order;
 import com.maven_project.pizzas.domain.Pizza;
-import com.maven_project.pizzas.service.card.SimpleCardService;
+import com.maven_project.pizzas.service.impl.SimpleCardService;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,7 +39,7 @@ public class DiscountAccumulativeCardTest {
         simplePizza = mock(Pizza.class);
         discount = new DiscountAccumulativeCard(cardService);
 
-        when(simplePizza.getCost()).thenReturn(10D);
+        when(simplePizza.getPrice()).thenReturn(10D);
     }
 
     @Test
@@ -48,7 +49,7 @@ public class DiscountAccumulativeCardTest {
         pizzas.put(simplePizza, 4);
 
         //Order order = new Order(customer, Arrays.asList(simplePizza, simplePizza, simplePizza, simplePizza));
-        Order order = new Order(customer, pizzas);
+        Order order = new Order(customer, pizzas, null);
 
         // Not more than 4 pizzas, no accumulative card
         double totalDiscount = discount.countDiscount(order);
@@ -59,14 +60,14 @@ public class DiscountAccumulativeCardTest {
     @Test
     public void testCountDiscountFivePizzasNoCard() throws Exception {
         Pizza expensivePizza = mock(Pizza.class);
-        when(expensivePizza.getCost()).thenReturn(100D);
+        when(expensivePizza.getPrice()).thenReturn(100D);
 
         Map<Pizza, Integer> pizzas = new HashMap<>();
         pizzas.put(simplePizza, 4);
         pizzas.put(expensivePizza, 1);
 
         //Order order = new Order(customer, Arrays.asList(simplePizza, simplePizza, simplePizza, simplePizza, expensivePizza));
-        Order order = new Order(customer, pizzas);
+        Order order = new Order(customer, pizzas, null);
 
         // More than 4 pizzas, no accumulative card
         double totalDiscount = discount.countDiscount(order);
@@ -82,13 +83,13 @@ public class DiscountAccumulativeCardTest {
         when(cardService.findCardByCustomer(any(Customer.class))).thenReturn(card);
 
         Pizza expensivePizza = mock(Pizza.class);
-        when(expensivePizza.getCost()).thenReturn(100D);
+        when(expensivePizza.getPrice()).thenReturn(100D);
 
         Map<Pizza, Integer> pizzas = new HashMap<>();
         pizzas.put(simplePizza, 4);
         pizzas.put(expensivePizza, 1);
 
-        Order order = new Order(customer, pizzas);
+        Order order = new Order(customer, pizzas, null);
 
         // More than 4 pizzas, with accumulative card
         double totalDiscount = discount.countDiscount(order);

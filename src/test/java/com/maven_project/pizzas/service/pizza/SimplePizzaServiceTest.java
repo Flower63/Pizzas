@@ -4,7 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.maven_project.pizzas.domain.Pizza;
-import com.maven_project.pizzas.repository.pizza.PizzaRepository;
+import com.maven_project.pizzas.repository.PizzaRepository;
+import com.maven_project.pizzas.service.PizzaService;
+import com.maven_project.pizzas.service.impl.SimplePizzaService;
 
 import static org.mockito.Mockito.*;
 
@@ -24,7 +26,7 @@ public class SimplePizzaServiceTest {
 	public void testGetPizzaByID() {
 		pizzaService.getPizzaByID(5);
 		
-		verify(pizzaRepository).getPizzaByID(5);
+		verify(pizzaRepository).findOne(5);
 	}
 
 	@Test
@@ -33,25 +35,15 @@ public class SimplePizzaServiceTest {
 		
 		pizzaService.savePizza(pizza);
 		
-		verify(pizzaRepository).savePizza(pizza);
+		verify(pizzaRepository).save(pizza);
 	}
 
 	@Test
 	public void testDeletePizza() {
 		Pizza pizza = new Pizza();
 		
-		pizzaService.deletePizza(pizza);
+		pizzaService.deletePizza(pizza.getPizzaId());
 		
-		verify(pizzaRepository).deletePizza(pizza);
+		verify(pizzaRepository).delete(pizza);
 	}
-
-	@Test
-	public void testUpdatePizza() {
-		Pizza pizza = new Pizza();
-		
-		pizzaService.updatePizza(pizza);
-		
-		verify(pizzaRepository).updatePizza(pizza);
-	}
-
 }

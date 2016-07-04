@@ -14,8 +14,8 @@ public class DiscountMostExpPizza implements Discount {
 		double maxPrice = 0;
 		
 		for(Pizza p : order.getPizzas().keySet()) {
-			if (p.getCost() > maxPrice) {
-				maxPrice = p.getCost();
+			if (p.getPrice() > maxPrice) {
+				maxPrice = p.getPrice();
 			}
 		}
 		

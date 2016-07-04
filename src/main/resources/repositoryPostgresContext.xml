@@ -3,14 +3,17 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xsi:schemaLocation="
                 http://www.springframework.org/schema/beans
                 http://www.springframework.org/schema/beans/spring-beans.xsd
                 http://www.springframework.org/schema/context
                 http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/data/jpa
+    			http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
                 http://www.springframework.org/schema/tx
                 http://www.springframework.org/schema/tx/spring-tx.xsd">
-    <context:component-scan base-package="com.maven_project.pizzas.repository" />
+    <!-- <context:component-scan base-package="com.maven_project.pizzas.repository" /> -->
 
     <context:property-placeholder system-properties-mode="OVERRIDE" location="classpath:postgresjdbc.properties"/>
 
@@ -43,4 +46,6 @@
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager" />
+    
+    <jpa:repositories base-package="com.maven_project.pizzas.repository"/>
 </beans>

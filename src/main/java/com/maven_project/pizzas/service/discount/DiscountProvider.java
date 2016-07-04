@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.maven_project.pizzas.domain.Order;
-import com.maven_project.pizzas.service.card.SimpleCardService;
+import com.maven_project.pizzas.service.impl.SimpleCardService;
 
 @Service(value="discountProvider")
 public class DiscountProvider {

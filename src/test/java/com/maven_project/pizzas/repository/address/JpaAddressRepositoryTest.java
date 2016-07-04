@@ -1,6 +1,8 @@
 package com.maven_project.pizzas.repository.address;
 
 import com.maven_project.pizzas.domain.Address;
+import com.maven_project.pizzas.repository.AddressRepository;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,44 +33,44 @@ public class JpaAddressRepositoryTest {
 
     @Test
     public void findAddress() throws Exception {
-        addressRepository.saveAddress(address);
+        addressRepository.save(address);
 
-        assertNotNull(addressRepository.findAddress(address.getId()));
+        assertNotNull(addressRepository.findOne(address.getId()));
     }
 
     @Test
     public void saveAddress() throws Exception {
         assertNull(address.getId());
 
-        addressRepository.saveAddress(address);
+        addressRepository.save(address);
 
         assertNotNull(address.getId());
 
-        assertNotNull(addressRepository.findAddress(address.getId()));
+        assertNotNull(addressRepository.findOne(address.getId()));
     }
 
     @Test
     public void updateAddress() throws Exception {
-        addressRepository.saveAddress(address);
+        addressRepository.save(address);
 
         address.setCity("New York");
 
-        addressRepository.updateAddress(address);
+        addressRepository.save(address);
 
-        Address temp = addressRepository.findAddress(address.getId());
+        Address temp = addressRepository.findOne(address.getId());
 
         assertEquals("New York", temp.getCity());
     }
 
     @Test
     public void deleteAddress() throws Exception {
-        addressRepository.saveAddress(address);
+        addressRepository.save(address);
 
-        assertNotNull(addressRepository.findAddress(address.getId()));
+        assertNotNull(addressRepository.findOne(address.getId()));
 
-        addressRepository.deleteAddress(address);
+        addressRepository.delete(address);
 
-        assertNull(addressRepository.findAddress(address.getId()));
+        assertNull(addressRepository.findOne(address.getId()));
     }
 
 }

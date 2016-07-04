@@ -1,13 +1,19 @@
 package com.maven_project.pizzas.domain;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Pizza {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Integer id;
+	private Integer pizzaId;
 
 	private String name;
 
@@ -15,23 +21,22 @@ public class Pizza {
 	@Column(name = "PIZZA_TYPE")
 	private Type type;
 
-	private double cost;
-	
-	public Pizza(String name, Type type, Double cost) {
+	private Double price;
+
+	public Pizza(String name, Type type, Double price) {
 		this.name = name;
 		this.type = type;
-		this.cost = cost;
+		this.price = price;
 	}
 
-	public Pizza() {
+	public Pizza() {}
+
+	public Integer getPizzaId() {
+		return pizzaId;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
+	public void setPizzaId(Integer pizzaId) {
+		this.pizzaId = pizzaId;
 	}
 
 	public String getName() {
@@ -50,31 +55,36 @@ public class Pizza {
 		this.type = type;
 	}
 
-	public double getCost() {
-		return cost;
+	public Double getPrice() {
+		return price;
 	}
 
-	public void setCost(double cost) {
-		this.cost = cost;
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
 	public enum Type {
-		SEA, VEGETERIAN, REGULAR
+		SEA,
+		VEGETERIAN,
+		REGULAR
 	}
 
 	@Override
 	public String toString() {
-		return "Pizza [id=" + id + ", name=" + name + ", type=" + type + "]";
+		return "Pizza [id=" + pizzaId + ", name=" + name + ", type=" + type + "]";
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof Pizza)) return false;
+		if (this == o)
+			return true;
+		if (!(o instanceof Pizza))
+			return false;
 
 		Pizza pizza = (Pizza) o;
 
-		if (getId() != pizza.getId()) return false;
+		if (getPizzaId() != pizza.getPizzaId())
+			return false;
 		return getName().equals(pizza.getName());
 
 	}

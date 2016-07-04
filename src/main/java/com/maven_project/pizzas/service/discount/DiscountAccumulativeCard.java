@@ -3,7 +3,7 @@ package com.maven_project.pizzas.service.discount;
 import com.maven_project.pizzas.domain.AccumulativeCard;
 import com.maven_project.pizzas.domain.Order;
 import com.maven_project.pizzas.domain.Pizza;
-import com.maven_project.pizzas.service.card.SimpleCardService;
+import com.maven_project.pizzas.service.impl.SimpleCardService;
 
 import java.util.Map;
 
@@ -37,7 +37,7 @@ public class DiscountAccumulativeCard implements Discount {
 		double total = 0;
 
 		for (Map.Entry<Pizza, Integer> entry : order.getPizzas().entrySet()) {
-			total += (entry.getKey().getCost() * entry.getValue());
+			total += (entry.getKey().getPrice() * entry.getValue());
 		}
 		
 		return total;

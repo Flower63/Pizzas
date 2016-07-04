@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 import java.util.Arrays;
 
 import com.maven_project.pizzas.domain.Order;
+import com.maven_project.pizzas.service.impl.SimpleDiscountService;
 
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -27,8 +28,8 @@ public class DiscountServiceTest {
     	
     	when(provider.getDiscounts(any(Order.class))).thenReturn(Arrays.asList(fakeDiscount, fakeDiscount));
     	
-    	DiscountService service = new DiscountService(provider);
+    	SimpleDiscountService service = new SimpleDiscountService(provider);
     	
-    	assertEquals(2.0, service.countDiscount(new Order(null, null)), 1e-15);
+    	assertEquals(2.0, service.countDiscount(new Order(null, null, null)), 1e-15);
     }
 }

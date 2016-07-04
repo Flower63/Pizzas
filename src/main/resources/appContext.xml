@@ -10,10 +10,11 @@
 <!--     	<context:annotation-config/> -->
     	
 	<context:component-scan base-package="com.maven_project.pizzas.service" />
+	<context:component-scan base-package="com.maven_project.pizzas.web.utils.asm" />
 
-	<context:component-scan base-package="com.maven_project.pizzas.domain">
+	<!-- <context:component-scan base-package="com.maven_project.pizzas.domain">
 		<context:include-filter type="annotation" expression="com.maven_project.pizzas.Domain"/>
-	</context:component-scan>
+	</context:component-scan> -->
         
     <!-- 
    	<bean name="pizzaRepository" 

@@ -4,7 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.maven_project.pizzas.domain.Customer;
-import com.maven_project.pizzas.repository.customer.CustomerRepository;
+import com.maven_project.pizzas.repository.CustomerRepository;
+import com.maven_project.pizzas.service.CustomerService;
+import com.maven_project.pizzas.service.impl.SimpleCustomerService;
 
 import static org.mockito.Mockito.*;
 
@@ -25,7 +27,7 @@ public class SimpleCustomerServiceTest {
 	public void testFindCustomer() {
 		customerService.findCustomer(5);
 		
-		verify(customerRepository).findCustomer(5);
+		verify(customerRepository).findOne(5);
 	}
 
 	@Test
@@ -34,16 +36,16 @@ public class SimpleCustomerServiceTest {
 		
 		customerService.saveCustomer(customer);
 		
-		verify(customerRepository).saveCustomer(customer);
+		verify(customerRepository).save(customer);
 	}
 
 	@Test
 	public void testUpdateCustomer() {
 		Customer customer = new Customer();
 		
-		customerService.updateCustomer(customer);
+		customerService.saveCustomer(customer);
 		
-		verify(customerRepository).updateCustomer(customer);
+		verify(customerRepository).save(customer);
 	}
 
 	@Test
@@ -52,7 +54,7 @@ public class SimpleCustomerServiceTest {
 		
 		customerService.deleteCustomer(customer);
 		
-		verify(customerRepository).deleteCustomer(customer);
+		verify(customerRepository).delete(customer);
 	}
 
 }

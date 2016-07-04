@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-4.1.xsd">
+           
+	<http auto-config="true">
+		<!-- <http-basic/> -->
+		<form-login default-target-url="/app/"/>
+		<intercept-url pattern="/app/" access="permitAll"/>
+		<intercept-url pattern="/app/**" access="hasAnyRole('USER', 'ADMIN')"/>
+		<intercept-url pattern="/rest/**" access="hasRole('ADMIN')"/>
+		<csrf/>
+		<logout invalidate-session="true"
+				delete-cookies="JSESSIONID"
+				logout-success-url="/"/>
+	</http>
+	
+	<!-- Custom authentication required! -->
+	<authentication-manager>
+		<authentication-provider ref="myAuthenticationProvider" />
+			<!-- <user-service>
+				<user name="andrii" password="123" authorities="ROLE_USER" />
+				<user name="admin" password="111" authorities="ROLE_ADMIN"/>
+			</user-service> -->
+	</authentication-manager>
+	
+	<beans:bean id="myAuthenticationProvider"
+	class="com.maven_project.pizzas.web.utils.security.PizzaServiceAuthentication"/>
+	
+</beans:beans>
