@@ -9,8 +9,8 @@
            
 	<http auto-config="true">
 		<!-- <http-basic/> -->
-		<form-login default-target-url="/app/"/>
-		<intercept-url pattern="/app/" access="permitAll"/>
+		<form-login login-page="/login.jsp" default-target-url="/"/>
+		<intercept-url pattern="/" access="permitAll"/>
 		<intercept-url pattern="/app/**" access="hasAnyRole('USER', 'ADMIN')"/>
 		<intercept-url pattern="/rest/**" access="hasRole('ADMIN')"/>
 		<csrf/>

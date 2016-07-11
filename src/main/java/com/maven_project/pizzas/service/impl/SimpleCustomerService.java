@@ -24,7 +24,7 @@ public class SimpleCustomerService implements CustomerService {
 
 	@Override
 	public Integer saveCustomer(Customer customer) {
-		return customerRepository.save(customer).getId();
+		return customerRepository.save(customer).getCustomerId();
 	}
 
 	@Override

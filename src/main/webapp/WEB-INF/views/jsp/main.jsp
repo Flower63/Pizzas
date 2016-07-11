@@ -5,7 +5,7 @@
 
 	<sec:authorize access="hasRole('ADMIN')">
 		<div class="side">
-			<form action="/pizzas/app/pizza/all">
+			<form action="/pizzas/app/pizza/" method="get">
 				<button type="submit">Manage pizzas</button>
 			</form>
 		</div>

@@ -68,24 +68,24 @@ public class OrderRepositoryTest {
 
 	@Test
 	public void testSaveOrder() {
-		assertNull(order.getId());
+		assertNull(order.getOrderId());
 		
 		orderRepository.save(order);
 		
-		assertNotNull(order.getId());
+		assertNotNull(order.getOrderId());
 		
-		assertNotNull(orderRepository.findOne(order.getId()));
+		assertNotNull(orderRepository.findOne(order.getOrderId()));
 	}
 
 	@Test
 	public void testDeleteOrder() {
 		orderRepository.save(order);
 
-		assertNotNull(orderRepository.findOne(order.getId()));
+		assertNotNull(orderRepository.findOne(order.getOrderId()));
 
 		orderRepository.delete(order);
 
-		assertNull(orderRepository.findOne(order.getId()));
+		assertNull(orderRepository.findOne(order.getOrderId()));
 	}
 
 }

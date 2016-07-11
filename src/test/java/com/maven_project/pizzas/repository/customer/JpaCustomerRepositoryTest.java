@@ -47,16 +47,16 @@ public class JpaCustomerRepositoryTest {
     public void findCustomer() throws Exception {
         customerRepository.save(customer);
 
-        assertNotNull(customerRepository.findOne(customer.getId()));
+        assertNotNull(customerRepository.findOne(customer.getCustomerId()));
     }
 
     @Test
     public void saveCustomer() throws Exception {
-        assertNull(customer.getId());
+        assertNull(customer.getCustomerId());
 
         customerRepository.save(customer);
 
-        assertNotNull(customer.getId());
+        assertNotNull(customer.getCustomerId());
     }
 
     @Test
@@ -67,7 +67,7 @@ public class JpaCustomerRepositoryTest {
 
         customerRepository.save(customer);
 
-        Customer temp = customerRepository.findOne(customer.getId());
+        Customer temp = customerRepository.findOne(customer.getCustomerId());
 
         assertEquals("Andrey", temp.getName());
     }
@@ -76,18 +76,18 @@ public class JpaCustomerRepositoryTest {
     public void deleteCustomer() throws Exception {
         customerRepository.save(customer);
 
-        assertNotNull(customerRepository.findOne(customer.getId()));
+        assertNotNull(customerRepository.findOne(customer.getCustomerId()));
 
         customerRepository.delete(customer);
 
-        assertNull(customerRepository.findOne(customer.getId()));
+        assertNull(customerRepository.findOne(customer.getCustomerId()));
     }
 
     @Test
     public void getCustomerAddress() {
         customerRepository.save(customer);
 
-        Customer temp = customerRepository.findOne(customer.getId());
+        Customer temp = customerRepository.findOne(customer.getCustomerId());
 
         assertEquals(1, temp.getAddresses().size());
 

@@ -5,7 +5,11 @@ import org.springframework.stereotype.Component;
 
 import com.maven_project.pizzas.domain.Pizza;
 import com.maven_project.pizzas.web.controller.app.PizzaController;
+import com.maven_project.pizzas.web.controller.rest.PizzaRestController;
 import com.maven_project.pizzas.web.utils.resource.PizzaResource;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @Component
 public class PizzaResourceAssembler extends ResourceAssemblerSupport<Pizza, PizzaResource> {
@@ -16,14 +20,24 @@ public class PizzaResourceAssembler extends ResourceAssemblerSupport<Pizza, Pizz
 
 	@Override
 	public PizzaResource toResource(Pizza entity) {
-		PizzaResource pizzaResource = new PizzaResource();
-		pizzaResource.setPizzaId(entity.getPizzaId());
+		PizzaResource pizzaResource = super.createResourceWithId(entity.getPizzaId(), entity);
 		pizzaResource.setName(entity.getName());
 		pizzaResource.setPrice(entity.getPrice());
 		pizzaResource.setType(entity.getType());
 		
-		//TODO add links
-		
+		pizzaResource.add(linkTo(methodOn(PizzaRestController.class).getAll()).withRel("all"));
+			
 		return pizzaResource;
+	}
+	
+	public Pizza toEntity(PizzaResource resource) {
+		Pizza pizza = new Pizza();
+		
+		pizza.setPizzaId(resource.getPizzaId());
+		pizza.setName(resource.getName());
+		pizza.setType(resource.getType());
+		pizza.setPrice(resource.getPrice());
+		
+		return pizza;
 	}
 }

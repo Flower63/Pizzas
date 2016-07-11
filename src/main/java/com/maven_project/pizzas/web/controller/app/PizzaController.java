@@ -3,6 +3,7 @@ package com.maven_project.pizzas.web.controller.app;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,19 +23,25 @@ public class PizzaController {
 		this.pizzaService = pizzaService;
 	}
 	
-	@RequestMapping(value = "/")
-	public String showMain() {
-		return "main";
-	}
-	
-	@RequestMapping(value = "/all")
-	public ModelAndView showAll() {
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView getAll() {
 		ModelAndView result = new ModelAndView();
 		
 		Iterable<Pizza> pizzas = pizzaService.getAll();
 		
 		result.addObject("pizzas", pizzas);
 		result.setViewName("all");
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/{id}")
+	public ModelAndView getOne(@PathVariable Integer id) {
+		Pizza pizza = pizzaService.getPizzaByID(id);
+		ModelAndView result = new ModelAndView();
+		
+		result.addObject("pizza", pizza);
+		result.setViewName("pizza");
 		
 		return result;
 	}
@@ -61,19 +68,19 @@ public class PizzaController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/delete")
+	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
 	public ModelAndView delete(@RequestParam Integer id) {
 		pizzaService.deletePizza(id);
 		
-		return showAll();
+		return getAll();
 	}
 	
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView save(@ModelAttribute Pizza pizza) {
 		if (pizza != null) {
 			pizzaService.savePizza(pizza);
 		}
 		
-		return showAll();
+		return getAll();
 	}
 }

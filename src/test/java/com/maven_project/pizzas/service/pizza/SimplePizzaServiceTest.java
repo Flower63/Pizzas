@@ -19,7 +19,7 @@ public class SimplePizzaServiceTest {
 	public void makePizzaService() {
 		pizzaRepository = mock(PizzaRepository.class);
 		
-		pizzaService = new SimplePizzaService(pizzaRepository);
+		//pizzaService = new SimplePizzaService(pizzaRepository);
 	}
 
 	@Test

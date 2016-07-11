@@ -15,8 +15,9 @@ import javax.persistence.*;
 public class Order {
 
 	@Id
+	@Column(name = "ORDER_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
+	private Long orderId;
 
 	@ManyToOne
 	private Customer customer;
@@ -53,8 +54,8 @@ public class Order {
 		this.isDiscountsApplicable = false;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getOrderId() {
+		return orderId;
 	}
 
 	public Customer getCustomer() {
@@ -79,36 +80,16 @@ public class Order {
 		return state;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder result = new StringBuilder();
-		result.append("Order id = ");
-		result.append(id);
-		result.append(" For ");
-		result.append(customer.getName());
-		result.append(" { ");
-
-		for (Map.Entry<Pizza, Integer> entry : pizzas.entrySet()) {
-			result.append(entry.getKey().toString());
-			result.append(" ");
-			result.append(entry.getValue());
-		}
-
-		result.append(" } ");
-
-		return result.toString();
-	}
-
 	public Boolean isDiscountsApplicable() {
 		return isDiscountsApplicable;
 	}
 
-	public void setDiscountsApplicable(boolean discountsApplicable) {
+	public void setDiscountsApplicable(Boolean discountsApplicable) {
 		isDiscountsApplicable = discountsApplicable;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
 	}
 
 	public void setCustomer(Customer customer) {

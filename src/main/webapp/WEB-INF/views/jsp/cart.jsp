@@ -5,10 +5,10 @@
 		<tr>
 			<td>${pizza.name}</td>
 			<td>${pizza.type}</td>
-			<td>${pizza.cost}</td>
+			<td>${pizza.price}</td>
 			<td>
 				<form action="/pizzas/app/order/remove_from_cart">
-					<input type="hidden" name="pizzaId" value="${pizza.id}">
+					<input type="hidden" name="pizzaId" value="${pizza.pizzaId}">
 					<button type="submit">Remove</button>
 				</form>
 			</td>

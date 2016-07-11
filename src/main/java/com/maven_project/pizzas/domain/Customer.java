@@ -8,7 +8,7 @@ public class Customer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Integer id;
+	private Integer customerId;
 
 	private String name;
 	private String email;
@@ -26,12 +26,12 @@ public class Customer {
 		this.addresses = addresses;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getCustomerId() {
+		return customerId;
 	}
 	
-	public void setId(Integer id) {
-		this.id = id;
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
 	}
 	
 	public String getName() {
@@ -78,7 +78,7 @@ public class Customer {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -92,10 +92,10 @@ public class Customer {
 		if (getClass() != obj.getClass())
 			return false;
 		Customer other = (Customer) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (customerId == null) {
+			if (other.customerId != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!customerId.equals(other.customerId))
 			return false;
 		if (name == null) {
 			if (other.name != null)

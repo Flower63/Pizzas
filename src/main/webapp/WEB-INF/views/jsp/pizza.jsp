@@ -1,6 +1,6 @@
 <%@ include file="header.jsp"%>
-	<form action="/pizzas/app/pizza/save" method="post">
-		<input type="hidden" name="id" value="${pizza.id}">
+	<form action="/pizzas/app/pizza/" method="post">
+		<input type="hidden" name="pizzaId" value="${pizza.pizzaId}">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<table>
 			<tr>
@@ -17,12 +17,12 @@
 			</tr>
 			<tr>
 				<td>Price</td>
-				<td><input type="number" step="any" name="cost" value="${pizza.cost}"></td>
+				<td><input type="number" step="any" name="price" value="${pizza.price}"></td>
 			</tr>
 		</table>
 		<button type="submit">Save</button>
 	</form>
-	<form action="/pizzas/app/pizza/all">
+	<form action="/pizzas/app/pizza/">
 		<button type="submit">Cancel</button>
 	</form>
 
