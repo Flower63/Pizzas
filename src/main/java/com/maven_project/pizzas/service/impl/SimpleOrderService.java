@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.maven_project.pizzas.domain.Address;
@@ -14,6 +16,7 @@ import com.maven_project.pizzas.domain.Pizza;
 import com.maven_project.pizzas.repository.OrderRepository;
 import com.maven_project.pizzas.service.OrderService;
 import com.maven_project.pizzas.service.PizzaService;
+import com.maven_project.pizzas.web.utils.resource.OrderDtoResource;
 
 @Service //(value="orderService")
 public class SimpleOrderService implements OrderService {
@@ -117,16 +120,12 @@ public class SimpleOrderService implements OrderService {
 	public double calculateDiscount(Order order) {
 		return discountService.countDiscount(order);
 	}
-
-	public void setOrderRepository(OrderRepository orderRepository) {
-		this.orderRepository = orderRepository;
-	}
-
-	public void setPizzaService(PizzaService pizzaService) {
-		this.pizzaService = pizzaService;
-	}
-
-	public void setDiscountService(SimpleDiscountService discountService) {
-		this.discountService = discountService;
+	
+	//TODO
+	@Override
+	public Iterable<OrderDtoResource> getAll(Pageable pageable) {
+		Iterable<OrderDtoResource> result = null;
+		
+		return result;
 	}
 }

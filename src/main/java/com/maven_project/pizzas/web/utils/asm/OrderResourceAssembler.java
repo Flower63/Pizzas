@@ -52,7 +52,7 @@ public class OrderResourceAssembler extends ResourceAssemblerSupport<Order, Orde
 		resource.setPrice(entity.getPrice());
 		resource.setDiscount(entity.getDiscount());
 		
-		resource.add(linkTo(methodOn(OrderRestController.class).getAll()).withRel("all"));
+		//resource.add(linkTo(methodOn(OrderRestController.class).getAll()).withRel("all"));
 		
 		return resource;
 	}
